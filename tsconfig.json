@@ -25,5 +25,5 @@
       "@layout/*": ["./layout/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "src/custom.d.ts"]
 }
