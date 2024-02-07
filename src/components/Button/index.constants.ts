@@ -1,7 +1,7 @@
 import type { Color, Size, Position, Roundness } from "./index.types";
 
 const commonButtonClass =
-  "h-12 rounded-4xl border border-transparent transition-all duration-150 text-base leading-5";
+  "h-12 rounded-4xl border border-transparent transition-all duration-150 text-base leading-5 px-9";
 
 const colorClasses: Record<Color, string> = {
   main:
@@ -9,7 +9,8 @@ const colorClasses: Record<Color, string> = {
     commonButtonClass,
   secondary:
     "text-black !border-black bg-white hover:bg-mainGray hover:shadow-inner-sm " +
-    commonButtonClass
+    commonButtonClass,
+  transparent: "bg-transparent border-none"
 };
 
 const sizeClasses: Record<Size, string> = {

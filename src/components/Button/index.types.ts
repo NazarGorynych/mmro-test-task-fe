@@ -8,7 +8,7 @@ export type ButtonProps = HTMLAttributes<HTMLButtonElement> & {
   sizeButton?: Size;
 };
 
-export type Color = "main" | "secondary";
+export type Color = "main" | "secondary" | "transparent";
 export type Size = "xs" | "sm" | "md" | "lg" | "xl" | "none";
 
 export type Position =

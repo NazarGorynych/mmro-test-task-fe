@@ -22,7 +22,7 @@ const Button: FC<ButtonProps> = ({
   return (
     <button
       className={cx(
-        "flex px-11",
+        "flex",
         full ? "w-full" : "w-fit",
         colorClasses[color],
         borderClasses[rounded],

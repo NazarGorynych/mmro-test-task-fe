@@ -1,3 +1,4 @@
+import { ReactComponent as AccountIcon } from "./account.svg";
 import { ReactComponent as CopyrightIcon } from "./copyright.svg";
 import { ReactComponent as FacebookIcon } from "./facebook.svg";
 import { ReactComponent as InstagramIcon } from "./instagram.svg";
@@ -11,5 +12,6 @@ export default {
   TiktokIcon,
   InstagramIcon,
   FacebookIcon,
-  CopyrightIcon
+  CopyrightIcon,
+  AccountIcon
 };
