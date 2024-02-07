@@ -11,7 +11,7 @@ import type { ButtonProps } from "./index.types";
 
 const Button: FC<ButtonProps> = ({
   children,
-  color = "primary",
+  color = "main",
   rounded = "normal",
   positionText = "center",
   sizeButton = "md",
@@ -22,7 +22,7 @@ const Button: FC<ButtonProps> = ({
   return (
     <button
       className={cx(
-        "flex px-24",
+        "flex px-11",
         full ? "w-full" : "w-fit",
         colorClasses[color],
         borderClasses[rounded],

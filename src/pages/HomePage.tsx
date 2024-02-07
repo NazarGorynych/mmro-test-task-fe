@@ -1,10 +1,11 @@
-import { ReactComponent as Logo } from "@assets/icons/logo.svg";
+import { Button } from "@components/index";
 
 const HomePage = () => {
   return (
     <section>
       Home
-      <Logo />
+      {/* <Icon type="Logo" /> */}
+      <Button color="secondary">test</Button>
     </section>
   );
 };

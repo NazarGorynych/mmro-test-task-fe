@@ -1,7 +1,15 @@
 import type { Color, Size, Position, Roundness } from "./index.types";
 
+const commonButtonClass =
+  "h-12 rounded-4xl border border-transparent transition-all duration-150 text-base leading-5";
+
 const colorClasses: Record<Color, string> = {
-  primary: "text-white bg-primary-gradient h-8 xs:h-9 md:h-3.4 m-1"
+  main:
+    "text-white bg-black border border-transparent hover:text-black hover:bg-white hover:border-black " +
+    commonButtonClass,
+  secondary:
+    "text-black !border-black bg-white hover:bg-mainGray hover:shadow-inner-sm " +
+    commonButtonClass
 };
 
 const sizeClasses: Record<Size, string> = {
