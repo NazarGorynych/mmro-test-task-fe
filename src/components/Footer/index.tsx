@@ -1,10 +1,11 @@
-import { Icon } from "@components/index";
+import { Icon, MainLogo } from "@components/index";
 
 const Footer = () => {
   return (
     <footer className="px-24 bg-black pt-12 pb-6 w-full flex justify-between">
       <div className="flex flex-col gap-8">
-        <Icon type="Logo" className=" fill-white" />
+        <MainLogo className="fill-white" />
+
         <div className="flex justify-between items-center">
           <Icon type="TiktokIcon" />
           <Icon type="FacebookIcon" />

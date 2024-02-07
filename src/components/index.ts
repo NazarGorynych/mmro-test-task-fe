@@ -6,3 +6,7 @@ export { Image } from "./Image";
 export { List } from "./List";
 export { Footer } from "./Footer";
 export { Header } from "./Header";
+export { Main } from "./Main";
+export { Filter } from "./Filter";
+export { MainLogo } from "./MainLogo";
+export { Field } from "./Field";
