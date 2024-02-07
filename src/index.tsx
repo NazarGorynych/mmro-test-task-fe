@@ -4,8 +4,10 @@ import {
   HomePage,
   CardPage,
   ChatPage,
-  CreateCardPage
+  CreateCardPage,
+  LoginPage
 } from "@pages/index";
+import { GoogleOAuthProvider } from "@react-oauth/google";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
@@ -30,6 +32,10 @@ const router = createBrowserRouter([
         element: <CreateCardPage />
       },
       {
+        path: "login",
+        element: <LoginPage />
+      },
+      {
         path: "chat",
         element: <ChatPage />
       }
@@ -40,4 +46,10 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
-root.render(<RouterProvider router={router} />);
+root.render(
+  <GoogleOAuthProvider
+    clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID as string}
+  >
+    <RouterProvider router={router} />
+  </GoogleOAuthProvider>
+);
