@@ -9,11 +9,12 @@ module.exports = {
         "4xl": "32px"
       },
       colors: {
-        mainGray: "#EEEEEE"
+        mainGray: "#EEEEEE",
+        primeryBlue: "#615EF0"
       },
       boxShadow: {
-        'inner-sm': 'inset 0px 4px 4px 0px #00000066',
-        'xl': '0px 18px 100px -24px #6d737a59',
+        "inner-sm": "inset 0px 4px 4px 0px #00000066",
+        xl: "0px 18px 100px -24px #6d737a59"
       }
     }
   },

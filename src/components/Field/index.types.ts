@@ -1,6 +1,11 @@
 import { Classes } from "@utils/types";
-import type { HTMLAttributes } from "react";
+import type { ComponentProps } from "react";
 
-export type FieldProps = HTMLAttributes<HTMLInputElement> & {
-  classes?: Classes;
+export type FieldProps = ComponentProps<"input"> & {
+  classes?: Classes & {
+    label?: string;
+    helperText?: string;
+  };
+  label?: string;
+  helperText?: string;
 };

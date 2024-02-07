@@ -1,30 +1,43 @@
+import { FilterFormValues } from "./index.types";
+
 export const listFilter = [
   {
     id: 0,
-    title: "Всі"
+    title: "Всі",
+    value: "all"
   },
   {
     id: 1,
-    title: "Техніка"
+    title: "Техніка",
+    value: "technique"
   },
   {
     id: 2,
-    title: "Спорт"
+    title: "Спорт",
+    value: "sports"
   },
   {
     id: 4,
-    title: "Книги"
+    title: "Книги",
+    value: "books"
   },
   {
     id: 5,
-    title: "Одяг"
+    title: "Одяг",
+    value: "clothing"
   },
   {
     id: 6,
-    title: "Заплановані на сьогодн"
+    title: "Заплановані на сьогодні",
+    value: "planned"
   },
   {
-    id: 6,
-    title: "Благодійні аукціони"
+    id: 7,
+    title: "Благодійні аукціони",
+    value: "charitable"
   }
 ];
+
+export const initialValues: FilterFormValues = {
+  auctionType: "all"
+};
