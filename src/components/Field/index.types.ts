@@ -8,6 +8,7 @@ export type FieldProps = ComponentProps<"input"> & {
   };
   label?: string;
   helperText?: string;
+  isRequred?: boolean;
   full?: boolean;
 };
 

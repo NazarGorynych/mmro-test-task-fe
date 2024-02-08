@@ -1,16 +1,35 @@
 import { Datepicker } from "@aliakbarazizi/headless-datepicker";
-import { Icon } from "@components/index";
+import { Icon, Label } from "@components/index";
 import cx from "clsx";
 import { FC, useState } from "react";
 
 import { CalendarFieldProps } from "./index.types";
 
 const CalendarField: FC<CalendarFieldProps> = (props) => {
-  const [value, setValue] = useState<Date | null>(new Date());
-
+  const { name, setFieldValue, classes, label, isRequred, helperText } = props;
+  const [value, setValue] = useState<Date | null>(props.value || new Date());
+  const handleChange = (value: Date | null) => {
+    setValue(value);
+    setFieldValue(name, value);
+  };
   return (
-    <>
-      <Datepicker onChange={setValue} value={value}>
+    <div
+      className={cx(
+        "flex flex-col w-auto gap-4 relative pb-2",
+        classes?.container
+      )}
+    >
+      {label && (
+        <Label
+          isRequred={isRequred}
+          className={cx(classes?.label, {
+            "!text-error": Boolean(helperText)
+          })}
+        >
+          {label}
+        </Label>
+      )}
+      <Datepicker onChange={handleChange} value={value}>
         <div className="flex rounded-4xl border-borderColor border px-4">
           <Datepicker.Input
             format="dd/MM/yyyy"
@@ -102,7 +121,17 @@ const CalendarField: FC<CalendarFieldProps> = (props) => {
           )}
         </Datepicker.Picker>
       </Datepicker>
-    </>
+      {helperText && (
+        <span
+          className={cx(
+            "text-error text-xs font-light absolute top-full",
+            classes?.helperText
+          )}
+        >
+          {helperText}
+        </span>
+      )}
+    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-import { Field } from "@components/index";
+import { Field, Label } from "@components/index";
 import cx from "clsx";
 import { FormikValues } from "formik";
 
@@ -15,16 +15,20 @@ const ComponentCheckboxButton = <T extends FormikValues>({
   if (!checkbox) {
     return null;
   }
-  const checked = formik.values[checkbox.value];
+  const [nameParm, nameField] = checkbox.name.split(".");
+  const checked = nameField
+    ? formik.values[nameParm][nameField]
+    : formik.values[nameParm];
   return (
     <Field
+      {...props}
       type="checkbox"
-      name={checkbox.value}
+      name={checkbox.name}
       onChange={formik.handleChange}
       className="hidden"
       classes={{
         label: cx(
-          "border cursor-pointer rounded-4xl border-black text-black py-4 px-9",
+          "border cursor-pointer rounded-4xl border-black text-black py-3 px-9",
           { "bg-black text-white": checked }
         )
       }}
@@ -32,7 +36,6 @@ const ComponentCheckboxButton = <T extends FormikValues>({
       key={checkbox.id}
       id={checkbox.value}
       checked={checked}
-      {...props}
     />
   );
 };
@@ -41,6 +44,8 @@ const CheckboxButton = <T extends FormikValues>({
   checkboxs,
   checkbox,
   formik,
+  label,
+  classes,
   ...props
 }: CheckboxButtonPorps<T>) => {
   if (!checkboxs?.length && checkbox) {
@@ -49,17 +54,25 @@ const CheckboxButton = <T extends FormikValues>({
     );
   }
   return (
-    <div className="flex flex-wrap gap-10 h-full justify-center">
-      {checkboxs?.map((checkbox) => {
-        return (
-          <ComponentCheckboxButton
-            key={checkbox.id}
-            formik={formik}
-            checkbox={checkbox}
-            {...props}
-          />
-        );
-      })}
+    <div className={cx("flex flex-col w-full gap-4", classes?.wrapper)}>
+      {label && <Label>{label}</Label>}
+      <div
+        className={cx(
+          "flex flex-wrap gap-10 h-full justify-center",
+          classes?.container
+        )}
+      >
+        {checkboxs?.map((checkbox) => {
+          return (
+            <ComponentCheckboxButton
+              key={checkbox.id}
+              formik={formik}
+              checkbox={checkbox}
+              {...props}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };

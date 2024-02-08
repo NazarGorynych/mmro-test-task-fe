@@ -8,7 +8,7 @@ const LayoutWithBg: FC<PropsWithChildren> = ({ children }) => {
     navigate(-1); // Moves one entry back in the history stack
   };
   return (
-    <div className="w-full relative overflow-hidden h-full">
+    <section className="w-full relative overflow-hidden h-full">
       <div className="absolute z-50 top-16 left-24">
         <Button onClick={goBack} color="transparent">
           <Icon type="ArrowLeft" />
@@ -20,7 +20,7 @@ const LayoutWithBg: FC<PropsWithChildren> = ({ children }) => {
         className="absolute"
       />
       <div className="relative z-40 py-16">{children}</div>
-    </div>
+    </section>
   );
 };
 

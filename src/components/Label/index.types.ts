@@ -1,3 +1,5 @@
 import { ComponentProps } from "react";
 
-export type LabelProps = ComponentProps<"label">;
+export type LabelProps = ComponentProps<"label"> & {
+  isRequred?: boolean;
+};

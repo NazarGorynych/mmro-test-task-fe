@@ -1,1 +1,5 @@
-export type { Classes, CheckboxButtonType } from "./shared.types";
+export type {
+  Classes,
+  CheckboxButtonType,
+  FormikActions
+} from "./shared.types";

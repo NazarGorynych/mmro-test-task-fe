@@ -10,6 +10,7 @@ const Field: FC<FieldProps> = ({
   helperText,
   id,
   full,
+  isRequred,
   ...props
 }) => {
   return (
@@ -21,7 +22,13 @@ const Field: FC<FieldProps> = ({
         )}
       >
         {label && (
-          <Label className={classes?.label} htmlFor={id}>
+          <Label
+            isRequred={isRequred}
+            className={cx(classes?.label, {
+              "!text-error": Boolean(helperText)
+            })}
+            htmlFor={id}
+          >
             {label}
           </Label>
         )}

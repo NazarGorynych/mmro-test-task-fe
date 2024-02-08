@@ -1,4 +1,6 @@
-import { FilterFormValues, CheckboxsType } from "./index.types";
+import { CheckboxButtonType } from "@utils/types";
+
+import { FilterFormValues } from "./index.types";
 
 export const listFilter = [
   {
@@ -38,21 +40,24 @@ export const listFilter = [
   }
 ];
 
-export const checkboxs: CheckboxsType[] = [
+export const checkboxs: CheckboxButtonType[] = [
   {
     id: 0,
     title: "Минулі аукціони",
-    value: "pastAction"
+    value: "pastAction",
+    name: "pastAction"
   },
   {
     id: 1,
     title: "Активні аукціони",
-    value: "activeAction"
+    value: "activeAction",
+    name: "activeAction"
   },
   {
     id: 2,
     title: "Заплановані аукціони",
-    value: "plansAction"
+    value: "plansAction",
+    name: "plansAction"
   }
 ];
 

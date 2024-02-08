@@ -1,4 +1,4 @@
-import { Filter, Field } from "@components/index";
+import { Filter } from "@components/index";
 import { useDocumentTitle } from "@hooks/index";
 
 const HomePage = () => {
@@ -6,7 +6,6 @@ const HomePage = () => {
   return (
     <section className="w-full">
       <Filter />
-      <Field label="Test" helperText="test testtest " />
     </section>
   );
 };

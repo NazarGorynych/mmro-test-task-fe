@@ -2,6 +2,7 @@ import { Field, CheckboxButton } from "@components/index";
 import cx from "clsx";
 import { useFormik } from "formik";
 
+import { ComponentForm } from "../ComponentForm";
 import { listFilter, initialValues, checkboxs } from "./index.constants";
 import { FilterFormValues } from "./index.types";
 
@@ -13,9 +14,9 @@ const Filter = () => {
   });
 
   return (
-    <form
-      onSubmit={formik.handleSubmit}
+    <ComponentForm
       className="w-full flex flex-col gap-10"
+      onSubmit={formik.handleSubmit}
     >
       <div className="flex flex-wrap gap-y-4 justify-center">
         {listFilter.map((item) => {
@@ -44,7 +45,7 @@ const Filter = () => {
         })}
       </div>
       <CheckboxButton<FilterFormValues> formik={formik} checkboxs={checkboxs} />
-    </form>
+    </ComponentForm>
   );
 };
 

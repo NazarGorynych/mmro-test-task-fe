@@ -7,4 +7,13 @@ export type CheckboxButtonType = {
   id: number;
   title: string;
   value: string;
+  name: string;
 };
+
+export interface FormikActions<Values> {
+  setFieldValue<Field extends keyof Values>(
+    field: Field,
+    value: Values[Field],
+    shouldValidate?: boolean
+  ): void;
+}

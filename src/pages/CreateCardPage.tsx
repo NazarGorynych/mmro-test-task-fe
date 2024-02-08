@@ -1,9 +1,15 @@
+import { CreateAction } from "@components/index";
 import { useDocumentTitle } from "@hooks/index";
+import { LayoutWithBg } from "@layout/index";
 
 const CreateCardPage = () => {
   useDocumentTitle("Create Card | Auction");
 
-  return <section>Create Card Page</section>;
+  return (
+    <LayoutWithBg>
+      <CreateAction />
+    </LayoutWithBg>
+  );
 };
 
 export { CreateCardPage };
