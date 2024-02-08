@@ -6,6 +6,7 @@ import { ReactComponent as FacebookIcon } from "./facebook.svg";
 import { ReactComponent as GoogleIcon } from "./google.svg";
 import { ReactComponent as InstagramIcon } from "./instagram.svg";
 import { ReactComponent as Logo } from "./logo.svg";
+import { ReactComponent as PlusIcon } from "./plus.svg";
 import { ReactComponent as SearchIcon } from "./search.svg";
 import { ReactComponent as TiktokIcon } from "./tiktok.svg";
 import { ReactComponent as YoutubeIcon } from "./youtube.svg";
@@ -21,5 +22,6 @@ export default {
   SearchIcon,
   GoogleIcon,
   CalendarIcon,
-  ArrowLeft
+  ArrowLeft,
+  PlusIcon
 };

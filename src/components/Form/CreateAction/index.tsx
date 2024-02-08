@@ -3,7 +3,8 @@ import {
   CheckboxButton,
   Field,
   CalendarField,
-  Button
+  Button,
+  File
 } from "@components/index";
 import { useFormik } from "formik";
 import { useNavigate } from "react-router-dom";
@@ -34,6 +35,12 @@ const CreateAction = () => {
       type="white"
     >
       <Typography text="Створення нового аукціону" tag="h2" />
+      <File
+        name={"cover"}
+        onChange={formik.handleChange}
+        onBlur={formik.handleBlur}
+        id={"name"}
+      />
       <Field
         value={name}
         onChange={formik.handleChange}

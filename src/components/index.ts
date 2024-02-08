@@ -14,4 +14,5 @@ export { Label } from "./Label";
 export { Modal } from "./Modal";
 export { CalendarField } from "./CalendarField";
 export { CheckboxButton } from "./CheckboxButton";
+export { File } from "./File";
 export * from "./Form";

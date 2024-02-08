@@ -17,7 +17,7 @@ const LayoutWithBg: FC<PropsWithChildren> = ({ children }) => {
       <img
         src={process.env.PUBLIC_URL + "/images/background-login.png"}
         alt="background"
-        className="absolute"
+        className="absolute h-full bottom-0 top-0"
       />
       <div className="relative z-40 py-16">{children}</div>
     </section>
