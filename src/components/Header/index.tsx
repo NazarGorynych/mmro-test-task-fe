@@ -7,7 +7,7 @@ const Header = () => {
     navigate("/login");
   };
   return (
-    <header className="bg-white px-24 flex items-center justify-between sticky top-0 max-h-32 h-full shadow-xl">
+    <header className="bg-white px-24 flex z-50 items-center py-10 justify-between sticky top-0 h-32 shadow-xl">
       <MainLogo className="fill-black" />
       <div className="flex gap-6">
         <Button onClick={handleClick}>Зарегеструватись</Button>
