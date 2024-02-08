@@ -1,3 +1,4 @@
+import { useDocumentTitle } from "@hooks/index";
 import { useRouteError } from "react-router-dom";
 
 interface ErrorWithMessage {
@@ -6,6 +7,8 @@ interface ErrorWithMessage {
 }
 
 const ErrorPage = () => {
+  useDocumentTitle("Error | Auction");
+
   const error = useRouteError() as ErrorWithMessage;
 
   return (

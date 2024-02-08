@@ -1,8 +1,11 @@
 import { Typography, Button, Icon } from "@components/index";
+import { useDocumentTitle } from "@hooks/index";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
 
 const LoginPage = () => {
+  useDocumentTitle("Login | Auction");
+
   const login = useGoogleLogin({
     onSuccess: async (credentialResponse) => {
       console.log(credentialResponse, "credentialResponse");
