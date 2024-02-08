@@ -7,7 +7,8 @@ module.exports = {
       "@components": path.resolve(__dirname, "src/components/"),
       "@utils": path.resolve(__dirname, "src/utils/"),
       "@assets": path.resolve(__dirname, "src/assets/"),
-      "@layout": path.resolve(__dirname, "src/layout/")
+      "@layout": path.resolve(__dirname, "src/layout/"),
+      "@hooks": path.resolve(__dirname, "src/hooks/")
     }
   }
 };

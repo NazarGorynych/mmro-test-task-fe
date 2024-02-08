@@ -7,12 +7,6 @@ export type ActionTypes =
   | "planned"
   | "charitable";
 
-export type CheckboxsType = {
-  id: number;
-  title: string;
-  value: "pastAction" | "activeAction" | "plansAction";
-};
-
 export type FilterFormValues = {
   auctionType: ActionTypes;
   pastAction: boolean;

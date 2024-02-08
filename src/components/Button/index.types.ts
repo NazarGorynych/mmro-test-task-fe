@@ -1,6 +1,6 @@
-import type { HTMLAttributes } from "react";
+import type { ComponentProps } from "react";
 
-export type ButtonProps = HTMLAttributes<HTMLButtonElement> & {
+export type ButtonProps = ComponentProps<"button"> & {
   color?: Color;
   rounded?: Roundness;
   full?: boolean;
