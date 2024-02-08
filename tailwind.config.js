@@ -10,7 +10,10 @@ module.exports = {
       },
       colors: {
         mainGray: "#EEEEEE",
-        primeryBlue: "#615EF0"
+        primeryBlue: "#615EF0",
+        seconderyGray: "#6D737A",
+        borderColor: "#C4C4C4",
+        error: "#FF3333"
       },
       boxShadow: {
         "inner-sm": "inset 0px 4px 4px 0px #00000066",

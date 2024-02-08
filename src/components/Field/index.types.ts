@@ -8,4 +8,7 @@ export type FieldProps = ComponentProps<"input"> & {
   };
   label?: string;
   helperText?: string;
+  full?: boolean;
 };
+
+export type TypeField = "main";

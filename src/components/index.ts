@@ -10,5 +10,6 @@ export { Main } from "./Main";
 export { Filter } from "./Filter";
 export { MainLogo } from "./MainLogo";
 export { Field } from "./Field";
+export { Label } from "./Label";
 export { Modal } from "./Modal";
-export { DatePickerComponent } from "./DatePickerComponent";
+export { CalendarField } from "./CalendarField";
