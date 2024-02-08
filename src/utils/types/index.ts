@@ -1,1 +1,1 @@
-export type { Classes } from "./shared.types";
+export type { Classes, CheckboxButtonType } from "./shared.types";

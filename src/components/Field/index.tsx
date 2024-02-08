@@ -17,7 +17,7 @@ const Field: FC<FieldProps> = ({
       <div
         className={cx(
           "flex flex-col w-auto gap-4 relative pb-2",
-          classes?.wrapper
+          classes?.container
         )}
       >
         {label && (
