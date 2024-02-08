@@ -10,3 +10,4 @@ export { Main } from "./Main";
 export { Filter } from "./Filter";
 export { MainLogo } from "./MainLogo";
 export { Field } from "./Field";
+export { Modal } from "./Modal";
