@@ -2,7 +2,7 @@ import { Field } from "@components/index";
 import cx from "clsx";
 import { useFormik } from "formik";
 
-import { listFilter, initialValues } from "./index.constants";
+import { listFilter, initialValues, checkboxs } from "./index.constants";
 import { FilterFormValues } from "./index.types";
 
 const Filter = () => {
@@ -13,8 +13,11 @@ const Filter = () => {
   });
 
   return (
-    <form className="flex flex-wrap w-full">
-      <div className="flex">
+    <form
+      onSubmit={formik.handleSubmit}
+      className="w-full flex flex-col gap-10"
+    >
+      <div className="flex flex-wrap gap-y-4 justify-center border-b-2 pb-[14px] border-b-[#E6E1E1]">
         {listFilter.map((item) => {
           return (
             <Field
@@ -35,6 +38,29 @@ const Filter = () => {
               key={item.id}
               id={item.value}
               value={item.value}
+            />
+          );
+        })}
+      </div>
+      <div className="flex flex-wrap gap-10 h-full justify-center">
+        {checkboxs.map((checkbox) => {
+          const checked = formik.values[checkbox.value];
+          return (
+            <Field
+              type="checkbox"
+              name={checkbox.value}
+              onChange={formik.handleChange}
+              className="hidden"
+              classes={{
+                label: cx(
+                  "border cursor-pointer rounded-4xl border-black text-black py-4 px-9",
+                  { "bg-black text-white": checked }
+                )
+              }}
+              label={checkbox.title}
+              key={checkbox.id}
+              id={checkbox.value}
+              checked={checked}
             />
           );
         })}

@@ -1,4 +1,4 @@
-import { FilterFormValues } from "./index.types";
+import { FilterFormValues, CheckboxsType } from "./index.types";
 
 export const listFilter = [
   {
@@ -38,6 +38,27 @@ export const listFilter = [
   }
 ];
 
+export const checkboxs: CheckboxsType[] = [
+  {
+    id: 0,
+    title: "Минулі аукціони",
+    value: "pastAction"
+  },
+  {
+    id: 1,
+    title: "Активні аукціони",
+    value: "activeAction"
+  },
+  {
+    id: 2,
+    title: "Заплановані аукціони",
+    value: "plansAction"
+  }
+];
+
 export const initialValues: FilterFormValues = {
-  auctionType: "all"
+  auctionType: "all",
+  pastAction: false,
+  activeAction: false,
+  plansAction: false
 };

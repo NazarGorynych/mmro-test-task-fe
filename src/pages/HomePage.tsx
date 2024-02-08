@@ -2,7 +2,7 @@ import { Filter } from "@components/index";
 
 const HomePage = () => {
   return (
-    <section>
+    <section className="w-full">
       <Filter />
     </section>
   );
