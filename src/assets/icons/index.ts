@@ -1,4 +1,5 @@
 import { ReactComponent as AccountIcon } from "./account.svg";
+import { ReactComponent as ArrowLeft } from "./arrow-left.svg";
 import { ReactComponent as CalendarIcon } from "./calendar.svg";
 import { ReactComponent as CopyrightIcon } from "./copyright.svg";
 import { ReactComponent as FacebookIcon } from "./facebook.svg";
@@ -19,5 +20,6 @@ export default {
   AccountIcon,
   SearchIcon,
   GoogleIcon,
-  CalendarIcon
+  CalendarIcon,
+  ArrowLeft
 };
