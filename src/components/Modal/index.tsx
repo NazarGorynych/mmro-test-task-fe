@@ -30,6 +30,7 @@ const ModalComponent: FC<ModalComponentType> = ({
   if (!open) {
     return null;
   }
+
   return (
     <div
       onClick={() => (noClose ? undefined : onClose())}
@@ -41,7 +42,7 @@ const ModalComponent: FC<ModalComponentType> = ({
       <div
         onClick={handleClick}
         className={clsx(
-          "border-white border-opacity-10 border p-10 rounded-md relative bg-[#20262F]",
+          "border p-6 rounded-3xl relative bg-white",
           classes?.container
         )}
         role="dialog"
@@ -61,5 +62,5 @@ ModalFooter.displayName = "Modal.Footer";
 export const Modal = Object.assign(ModalComponent, {
   Header: ModalHeader,
   Body: ModalBody,
-  Footer: ModalHeader
+  Footer: ModalFooter
 });

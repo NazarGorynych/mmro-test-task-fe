@@ -7,6 +7,7 @@ const DropdownAccount: FC<DropdownAccountProps> = ({
   balance,
   isOpen,
   children,
+  handleOpenModal,
   onClose
 }) => {
   const handleClickWrapper = (event: MouseEvent<HTMLDivElement>) => {
@@ -28,7 +29,7 @@ const DropdownAccount: FC<DropdownAccountProps> = ({
         {isOpen && (
           <ul className="bg-white shadow-xl absolute py-3 px-2.5 rounded-2xl top-full min-w-56 right-0">
             <li className="px-7 py-1.5 rounded-lg hover:bg-black hover:bg-opacity-5 h-14 flex justify-center items-center">
-              <button className="w-full flex gap-1">
+              <button onClick={handleOpenModal} className="w-full flex gap-1">
                 <Icon type="WaletIcon" />
                 <span className="flex flex-col items-start">
                   <span className="text-sm font-light text-black">Баланс</span>

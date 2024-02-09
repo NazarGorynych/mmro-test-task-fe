@@ -25,3 +25,8 @@ code {
   }
 }
 
+.background-modal {
+  background: rgba(29, 21, 38, 0.30);
+  backdrop-filter: blur(10px);
+}
+

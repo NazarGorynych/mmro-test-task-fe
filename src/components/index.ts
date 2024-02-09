@@ -16,4 +16,6 @@ export { CalendarField } from "./CalendarField";
 export { CheckboxButton } from "./CheckboxButton";
 export { File } from "./File";
 export { DropdownAccount } from "./DropdownAccount";
+export { ModalBalance } from "./ModalBalance";
+export { Textarea } from "./Textarea";
 export * from "./Form";

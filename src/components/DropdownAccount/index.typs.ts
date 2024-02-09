@@ -4,4 +4,5 @@ export type DropdownAccountProps = {
   balance?: number;
   isOpen: boolean;
   onClose: () => void;
+  handleOpenModal: () => void;
 } & PropsWithChildren;
