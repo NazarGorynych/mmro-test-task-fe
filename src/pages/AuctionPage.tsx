@@ -1,8 +1,8 @@
 import { useDocumentTitle } from "@hooks/index";
 
-const CardPage = () => {
+const AuctionPage = () => {
   useDocumentTitle("Card | Auction");
   return <section>Card</section>;
 };
 
-export { CardPage };
+export { AuctionPage };

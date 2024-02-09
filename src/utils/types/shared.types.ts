@@ -12,6 +12,13 @@ export type CheckboxButtonType = {
   name: string;
 };
 
+export type AmmoutRadioType = {
+  id: number;
+  title: string;
+  value: number;
+  name?: string;
+};
+
 export interface FormikActions<Values> {
   setFieldValue<Field extends keyof Values>(
     field: Field,

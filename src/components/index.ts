@@ -18,4 +18,5 @@ export { File } from "./File";
 export { DropdownAccount } from "./DropdownAccount";
 export { ModalBalance } from "./ModalBalance";
 export { Textarea } from "./Textarea";
+export { AmountRadio } from "./AmountRadio";
 export * from "./Form";

@@ -1,6 +1,6 @@
 export { ErrorPage } from "./ErrorPage";
 export { HomePage } from "./HomePage";
-export { CardPage } from "./CardPage";
+export { AuctionPage } from "./AuctionPage";
 export { ChatPage } from "./ChatPage";
-export { CreateCardPage } from "./CreateCardPage";
+export { CreateAuctionPage } from "./CreateAuctionPage";
 export { LoginPage } from "./LoginPage";

@@ -2,9 +2,9 @@ import { RootLayout } from "@layout/index";
 import {
   ErrorPage,
   HomePage,
-  CardPage,
+  AuctionPage,
   ChatPage,
-  CreateCardPage,
+  CreateAuctionPage,
   LoginPage
 } from "@pages/index";
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -24,12 +24,12 @@ const router = createBrowserRouter([
         element: <HomePage />
       },
       {
-        path: "card/:cardId",
-        element: <CardPage />
+        path: "auction/:auctionId",
+        element: <AuctionPage />
       },
       {
-        path: "card/create",
-        element: <CreateCardPage />
+        path: "create-auction",
+        element: <CreateAuctionPage />
       },
       {
         path: "login",
