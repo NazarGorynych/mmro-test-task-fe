@@ -30,7 +30,7 @@ const CalendarField: FC<CalendarFieldProps> = (props) => {
         </Label>
       )}
       <Datepicker onChange={handleChange} value={value}>
-        <div className="flex rounded-4xl border-borderColor border px-4">
+        <div className="flex rounded-4xl border-black border px-4 bg-white">
           <Datepicker.Input
             format="dd/MM/yyyy"
             className={
@@ -47,7 +47,7 @@ const CalendarField: FC<CalendarFieldProps> = (props) => {
         </div>
         <Datepicker.Picker
           defaultType="day"
-          className="rounded-md bg-black p-4 shadow-md dark:bg-gray-800 dark:text-gray-300 w-[352px]"
+          className="rounded-md bg-black p-4 shadow-md z-[100] dark:bg-gray-800 dark:text-gray-300 w-[352px]"
         >
           {({ monthName, year }) => (
             <>
