@@ -12,7 +12,8 @@ const ComponentAmountRadio = <T extends FormikValues>({
   if (!amount) {
     return null;
   }
-  const checked = formik.values[amount?.name as string];
+  const value = formik.values[props?.name as string];
+
   return (
     <Field
       type="radio"
@@ -21,7 +22,7 @@ const ComponentAmountRadio = <T extends FormikValues>({
       classes={{
         label: cx(
           "text-xs font-bold py-3 px-6 rounded-3xl border border-black cursor-pointer",
-          { "bg-black text-white": checked }
+          { "bg-black text-white": `${amount.value}` === value }
         )
       }}
       onChange={formik.handleChange}

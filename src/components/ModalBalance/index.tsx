@@ -17,7 +17,7 @@ const ModalBalance: FC<ModalBalanceProps> = ({ open, onClose }) => {
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     formik.setFieldValue("balance", value);
-    formik.setFieldValue("amount", null);
+    formik.setFieldValue("amount", value);
   };
 
   useEffect(() => {
@@ -31,7 +31,7 @@ const ModalBalance: FC<ModalBalanceProps> = ({ open, onClose }) => {
       <form className="flex-col flex gap-6" onSubmit={formik.handleSubmit}>
         <Modal.Header onClose={onClose} />
         <Modal.Body className="flex flex-col gap-6">
-          <AmountRadio amounts={radioAmount} formik={formik} />
+          <AmountRadio name={"amount"} amounts={radioAmount} formik={formik} />
           <Field
             full
             value={balance}
@@ -42,8 +42,12 @@ const ModalBalance: FC<ModalBalanceProps> = ({ open, onClose }) => {
           />
         </Modal.Body>
         <Modal.Footer className="flex gap-6">
-          <Button color="secondary">Назад</Button>
-          <Button className="flex-1">Поповнити баланс</Button>
+          <Button onClick={onClose} color="secondary">
+            Назад
+          </Button>
+          <Button type="submit" className="flex-1">
+            Поповнити баланс
+          </Button>
         </Modal.Footer>
       </form>
     </Modal>
