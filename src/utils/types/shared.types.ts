@@ -1,3 +1,5 @@
+import { ReactNode, FC, SVGProps } from "react";
+
 export type Classes = {
   wrapper?: string;
   container?: string;
@@ -17,3 +19,10 @@ export interface FormikActions<Values> {
     shouldValidate?: boolean
   ): void;
 }
+
+export type DropdownOption = {
+  id: number;
+  value: string | number;
+  label: string | ReactNode;
+  icon?: FC<SVGProps<SVGElement>>;
+};

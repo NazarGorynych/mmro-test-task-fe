@@ -15,4 +15,5 @@ export { Modal } from "./Modal";
 export { CalendarField } from "./CalendarField";
 export { CheckboxButton } from "./CheckboxButton";
 export { File } from "./File";
+export { DropdownAccount } from "./DropdownAccount";
 export * from "./Form";
