@@ -63,10 +63,7 @@ const MyAuctionPage = () => {
   return (
     <section className="w-full flex flex-col gap-9">
       <Typography tag="h2" text="Мої Аукціони та Ставки" />
-      <Filter
-        list={list}
-        className="!justify-start !gap-7 w-fit items-center"
-      />
+      <Filter list={list} className="!justify-start items-center" />
       <div className="grid grid-cols-2 gap-5 w-full">
         {auctions.map((auction) => (
           <MyAuctionCard

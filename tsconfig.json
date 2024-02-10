@@ -22,7 +22,8 @@
       "@hooks/*": ["./hooks/*"],
       "@utils/*": ["./utils/*"],
       "@assets/*": ["./assets/*"],
-      "@layout/*": ["./layout/*"]
+      "@layout/*": ["./layout/*"],
+      "@stores/*": ["./stores/*"]
     }
   },
   "include": ["src", "src/custom.d.ts"]
