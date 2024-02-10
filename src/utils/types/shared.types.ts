@@ -38,3 +38,9 @@ export type TagsType = {
   id: number;
   text: string;
 };
+
+export type FilterListType = {
+  id: number;
+  title: string;
+  value: string;
+};

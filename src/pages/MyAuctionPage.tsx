@@ -35,6 +35,19 @@ const auctions = [
   }
 ];
 
+export const list = [
+  {
+    id: 0,
+    title: "Аукціони",
+    value: "all"
+  },
+  {
+    id: 0,
+    title: "Ставки",
+    value: "rate"
+  }
+];
+
 const MyAuctionPage = () => {
   useDocumentTitle("My Auction");
   const [openConfirm, setOpenConfirm] = useState(false);
@@ -49,8 +62,11 @@ const MyAuctionPage = () => {
 
   return (
     <section className="w-full flex flex-col gap-9">
-      <Typography tag="h2" text="Мої аукціони" />
-      <Filter />
+      <Typography tag="h2" text="Мої Аукціони та Ставки" />
+      <Filter
+        list={list}
+        className="!justify-start !gap-7 w-fit items-center"
+      />
       <div className="grid grid-cols-2 gap-5 w-full">
         {auctions.map((auction) => (
           <MyAuctionCard

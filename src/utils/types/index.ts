@@ -4,5 +4,6 @@ export type {
   FormikActions,
   DropdownOption,
   AmmoutRadioType,
-  TagsType
+  TagsType,
+  FilterListType
 } from "./shared.types";

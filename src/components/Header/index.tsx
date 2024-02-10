@@ -5,8 +5,9 @@ import {
   DropdownAccount,
   ModalBalance
 } from "@components/index";
+import cx from "clsx";
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 const Header = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -40,16 +41,36 @@ const Header = () => {
       <div className="flex gap-6">
         {isLogin ? (
           <nav className="flex gap-9 items-center">
-            <Link
-              className="text-black text-lg font-bold flex gap-2 items-center"
+            <NavLink
+              className={({ isActive }) =>
+                cx("text-black text-lg font-bold flex gap-2 items-center", {
+                  "text-primeryBlue": isActive
+                })
+              }
               to={"/create-auction"}
             >
-              <Icon type={"PlusIcon"} className="stroke-black" />
-              Cтворити аукціон
-            </Link>
-            <Link className="text-black text-lg font-bold" to={"/my-auction"}>
+              {({ isActive }) => (
+                <>
+                  <Icon
+                    type={"PlusIcon"}
+                    className={cx("stroke-black", {
+                      "stroke-primeryBlue": isActive
+                    })}
+                  />
+                  Cтворити аукціон
+                </>
+              )}
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                cx("text-black text-lg font-bold", {
+                  "text-primeryBlue": isActive
+                })
+              }
+              to={"/my-auction"}
+            >
               Мої аукціони
-            </Link>
+            </NavLink>
           </nav>
         ) : (
           <Button onClick={handleClick}>Зареєструватись</Button>
