@@ -24,4 +24,5 @@ export { DateComponent } from "./DateComponent";
 export { InitialRate } from "./InitialRate";
 export { MyAuctionCard } from "./MyAuctionCard";
 export { Confirm } from "./Confirm";
+export { Auction } from "./Auction";
 export * from "./Form";
