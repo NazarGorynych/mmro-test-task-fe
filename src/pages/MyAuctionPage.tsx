@@ -46,6 +46,7 @@ const MyAuctionPage = () => {
   const handleCloseConfirm = () => {
     setOpenConfirm(false);
   };
+
   return (
     <section className="w-full flex flex-col gap-9">
       <Typography tag="h2" text="Мої аукціони" />
