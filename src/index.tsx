@@ -5,7 +5,8 @@ import {
   AuctionPage,
   ChatPage,
   CreateAuctionPage,
-  LoginPage,
+  SignUpPage,
+  SignInPage,
   MyAuctionPage
 } from "@pages/index";
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -38,7 +39,11 @@ const router = createBrowserRouter([
       },
       {
         path: "login",
-        element: <LoginPage />
+        element: <SignInPage />
+      },
+      {
+        path: "sign-up",
+        element: <SignUpPage />
       },
       {
         path: "chat",

@@ -8,7 +8,7 @@ const Main = () => {
     <main
       className={clsx("flex-1", {
         "w-full max-w-screen-2xl px-24 pb-23 box-border m-auto pt-9 flex flex-col items-center":
-          !["/login", "/create-auction"].includes(location.pathname)
+          !["/login", "/create-auction", "/sign-up"].includes(location.pathname)
       })}
     >
       <Outlet />
