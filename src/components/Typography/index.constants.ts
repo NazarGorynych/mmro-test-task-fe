@@ -7,5 +7,5 @@ export const sizes: Record<TypographyTag, string> = {
   h4: "text-2xl text-black font-bold ",
   h5: "",
   h6: "",
-  p: ""
+  p: "text-gray-500 dark:text-gray-400"
 };
