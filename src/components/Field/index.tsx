@@ -17,7 +17,7 @@ const Field: FC<FieldProps> = ({
     <div className={classes?.wrapper}>
       <div
         className={cx(
-          "flex flex-col w-auto gap-4 relative pb-2",
+          "flex flex-col w-auto gap-4 relative",
           classes?.container
         )}
       >

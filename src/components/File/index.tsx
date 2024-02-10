@@ -9,7 +9,7 @@ const File: FC<FileProps> = ({ id, ...props }) => {
       id={id}
       label={
         <div className="flex flex-col justify-center items-center gap-4">
-          <Icon type={"PlusIcon"} />
+          <Icon type={"PlusIcon"} className="stroke-primeryBlue" />
           <span className="text-base font-bold text-seconderyGray">
             Додати Обкладинку
           </span>

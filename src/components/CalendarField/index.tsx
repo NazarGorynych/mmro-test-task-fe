@@ -30,7 +30,7 @@ const CalendarField: FC<CalendarFieldProps> = (props) => {
         </Label>
       )}
       <Datepicker onChange={handleChange} value={value}>
-        <div className="flex rounded-4xl border-black border px-4 bg-white">
+        <div className="flex rounded-4xl border-black border px-4 bg-white group">
           <Datepicker.Input
             format="dd/MM/yyyy"
             className={
@@ -42,7 +42,7 @@ const CalendarField: FC<CalendarFieldProps> = (props) => {
             action="toggle"
             className="px-3.5 py-3"
           >
-            <Icon type="CalendarIcon" />
+            <Icon type="CalendarIcon" className="group-hover:fill-black" />
           </Datepicker.Button>
         </div>
         <Datepicker.Picker

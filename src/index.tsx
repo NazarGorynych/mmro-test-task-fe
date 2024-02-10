@@ -5,7 +5,8 @@ import {
   AuctionPage,
   ChatPage,
   CreateAuctionPage,
-  LoginPage
+  LoginPage,
+  MyAuctionPage
 } from "@pages/index";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import ReactDOM from "react-dom/client";
@@ -24,8 +25,12 @@ const router = createBrowserRouter([
         element: <HomePage />
       },
       {
-        path: "auction/:auctionId",
+        path: "my-auction/:auctionId",
         element: <AuctionPage />
+      },
+      {
+        path: "my-auction",
+        element: <MyAuctionPage />
       },
       {
         path: "create-auction",

@@ -18,7 +18,7 @@ const Filter = () => {
       className="w-full flex flex-col gap-10"
       onSubmit={formik.handleSubmit}
     >
-      <div className="flex flex-wrap gap-y-4 justify-center">
+      <div className="flex flex-wrap gap-y-4 justify-between border-b-[#E6E1E1] border-b-2">
         {listFilter.map((item) => {
           return (
             <Field
@@ -29,9 +29,9 @@ const Filter = () => {
               classes={{
                 container: "pb-0 gap-0",
                 label: cx(
-                  "text-black border-b-2 text-black border-b-[#E6E1E1] p-4 text-2xl font-bold cursor-pointer relative",
+                  "text-black text-black p-4 text-2xl font-bold cursor-pointer relative before:block before:w-full before:h-1 before:rounded-lg before:left-0 before:absolute before:top-[calc(100%-2px)] hover:before:bg-primeryBlue",
                   {
-                    "before:block before:w-full before:h-1 before:rounded-lg before:left-0 before:bg-primeryBlue before:absolute before:top-[calc(100%-2px)]":
+                    "before:bg-primeryBlue":
                       formik.values.auctionType === item.value
                   }
                 )

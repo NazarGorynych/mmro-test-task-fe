@@ -3,5 +3,6 @@ export type {
   CheckboxButtonType,
   FormikActions,
   DropdownOption,
-  AmmoutRadioType
+  AmmoutRadioType,
+  TagsType
 } from "./shared.types";

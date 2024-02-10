@@ -33,3 +33,8 @@ export type DropdownOption = {
   label: string | ReactNode;
   icon?: FC<SVGProps<SVGElement>>;
 };
+
+export type TagsType = {
+  id: number;
+  text: string;
+};

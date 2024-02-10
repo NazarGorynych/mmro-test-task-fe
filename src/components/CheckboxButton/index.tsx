@@ -28,7 +28,7 @@ const ComponentCheckboxButton = <T extends FormikValues>({
       className="hidden"
       classes={{
         label: cx(
-          "border cursor-pointer rounded-4xl border-black text-black py-3 px-9",
+          "border cursor-pointer rounded-4xl border-black text-black py-3 px-9 hover:bg-black hover:text-white",
           { "bg-black text-white": checked }
         )
       }}

@@ -28,9 +28,12 @@ const DropdownAccount: FC<DropdownAccountProps> = ({
         {children}
         {isOpen && (
           <ul className="bg-white shadow-xl absolute py-3 px-2.5 rounded-2xl top-full min-w-56 right-0">
-            <li className="px-7 py-1.5 rounded-lg hover:bg-black hover:bg-opacity-5 h-14 flex justify-center items-center">
+            <li className=" group px-7 py-1.5 rounded-lg hover:bg-black hover:bg-opacity-5 h-14 flex justify-center items-center">
               <button onClick={handleOpenModal} className="w-full flex gap-1">
-                <Icon type="WaletIcon" />
+                <Icon
+                  type="WaletIcon"
+                  className="group-hover:fill-primeryBlue"
+                />
                 <span className="flex flex-col items-start">
                   <span className="text-sm font-light text-black">Баланс</span>
                   <span className="text-primeryBlue text-lg font-bold">
