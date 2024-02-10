@@ -1,3 +1,4 @@
+import { Icon } from "@components/index";
 import clsx from "clsx";
 import { FC, PropsWithChildren } from "react";
 
@@ -13,12 +14,12 @@ const ModalHeader: FC<ModalFooterProps> = ({ children, classes, onClose }) => {
       <button
         onClick={onClose}
         className={clsx(
-          "absolute top-0 right-0 rounded-full hover:bg-white hover:bg-opacity-10 m-1",
+          "absolute top-4 right-6 rounded-full hover:bg-seconderyGray hover:bg-opacity-5 p-2",
           classes?.close
         )}
         aria-label="Close"
       >
-        {/* <CloseIcon /> */}
+        <Icon type="CloseIcon" className=" hover:fill-primeryBlue" />
       </button>
 
       {children}

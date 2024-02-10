@@ -1,4 +1,5 @@
 import { Icon, MainLogo } from "@components/index";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -7,10 +8,18 @@ const Footer = () => {
         <MainLogo className="fill-white" />
 
         <div className="flex justify-between items-center">
-          <Icon type="TiktokIcon" />
-          <Icon type="FacebookIcon" />
-          <Icon type="InstagramIcon" />
-          <Icon type="YoutubeIcon" />
+          <Link to={"https://www.tiktok.com/"} target="_blank">
+            <Icon type="TiktokIcon" />
+          </Link>
+          <Link to={"https://uk-ua.facebook.com/"} target="_blank">
+            <Icon type="FacebookIcon" />
+          </Link>
+          <Link to={"https://www.instagram.com/"} target="_blank">
+            <Icon type="InstagramIcon" />
+          </Link>
+          <Link to={"https://www.youtube.com/"} target="_blank">
+            <Icon type="YoutubeIcon" />
+          </Link>
         </div>
       </div>
       <div className="flex flex-col justify-between">

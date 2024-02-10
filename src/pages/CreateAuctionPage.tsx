@@ -2,7 +2,7 @@ import { CreateAction } from "@components/index";
 import { useDocumentTitle } from "@hooks/index";
 import { LayoutWithBg } from "@layout/index";
 
-const CreateCardPage = () => {
+const CreateAuctionPage = () => {
   useDocumentTitle("Create Card | Auction");
 
   return (
@@ -12,4 +12,4 @@ const CreateCardPage = () => {
   );
 };
 
-export { CreateCardPage };
+export { CreateAuctionPage };

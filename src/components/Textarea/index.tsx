@@ -2,9 +2,9 @@ import { Label } from "@components/index";
 import cx from "clsx";
 import { FC } from "react";
 
-import { FieldProps } from "./index.types";
+import { TextareaProps } from "./index.types";
 
-const Field: FC<FieldProps> = ({
+const Textarea: FC<TextareaProps> = ({
   classes,
   label,
   helperText,
@@ -17,7 +17,7 @@ const Field: FC<FieldProps> = ({
     <div className={classes?.wrapper}>
       <div
         className={cx(
-          "flex flex-col w-auto gap-4 relative",
+          "flex flex-col w-auto gap-4 relative pb-2",
           classes?.container
         )}
       >
@@ -32,11 +32,11 @@ const Field: FC<FieldProps> = ({
             {label}
           </Label>
         )}
-        <input
+        <textarea
           id={id}
           {...props}
           className={cx(
-            "text-black outline-none px-4 rounded-4xl border focus:shadow-lg border-black disabled:border-borderColor h-12 placeholder:text-sm placeholder:font-light placeholder:text-seconderyGray",
+            "text-black resize-none outline-none px-4 rounded-4xl border focus:shadow-lg border-black disabled:border-borderColor h-12 placeholder:text-sm placeholder:font-light placeholder:text-seconderyGray",
             props?.className,
             full ? "w-full" : "w-fit"
           )}
@@ -56,4 +56,4 @@ const Field: FC<FieldProps> = ({
   );
 };
 
-export { Field };
+export { Textarea };
