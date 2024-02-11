@@ -1,4 +1,5 @@
 import { Footer, Header, Main } from "@components/index";
+import { Toaster } from "react-hot-toast";
 
 const RootLayout = () => {
   return (
@@ -6,6 +7,7 @@ const RootLayout = () => {
       <Header />
       <Main />
       <Footer />
+      <Toaster />
     </div>
   );
 };

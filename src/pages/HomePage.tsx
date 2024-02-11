@@ -44,7 +44,7 @@ export const list = [
 const HomePage = observer(() => {
   useDocumentTitle("Home | Auction");
   const {
-    auction: { getAuctions, auctions }
+    resource: { getAuctions, auctions }
   } = useStores();
 
   useEffect(() => {

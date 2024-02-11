@@ -18,7 +18,7 @@ export const list = [
 const MyAuctionPage = () => {
   useDocumentTitle("My Auction");
   const {
-    user: { getUserAuctions, userAuctions }
+    resource: { getUserAuctions, userAuctions }
   } = useStores();
   const [openConfirm, setOpenConfirm] = useState(false);
   const [idAuction, setIdAuction] = useState<number | null>(null);
@@ -48,7 +48,11 @@ const MyAuctionPage = () => {
           <span>у вас немає створених аукціонів.</span>
         )}
       </div>
-      <Confirm open={openConfirm} onClose={handleCloseConfirm} />
+      <Confirm
+        open={openConfirm}
+        onClose={handleCloseConfirm}
+        isButton={true}
+      />
     </section>
   );
 };

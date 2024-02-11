@@ -11,7 +11,7 @@ const auctioneer = {
 
 const AuctionPage = () => {
   const {
-    auction: { getAuction, auction }
+    resource: { getAuction, auction }
   } = useStores();
   const { auctionId } = useParams();
   useDocumentTitle("Card | Auction");

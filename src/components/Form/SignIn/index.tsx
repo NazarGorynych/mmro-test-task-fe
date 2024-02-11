@@ -22,8 +22,7 @@ const validationSchema = Yup.object({
 
 const SignIn = observer(() => {
   const {
-    resource: { user },
-    auth: { signIn }
+    resource: { user, signIn }
   } = useStores();
   const navigation = useNavigate();
   const [redirectTo, setRedirectTo] = useState<string | null>(null);

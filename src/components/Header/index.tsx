@@ -13,11 +13,9 @@ import { useNavigate, NavLink } from "react-router-dom";
 
 const Header = observer(() => {
   const {
-    resource: { user },
-    auth: { logout },
-    user: { replenishBalance },
-    resource: { balance, reservedBalance }
+    resource: { user, logout, replenishBalance, reservedBalance, balance }
   } = useStores();
+
   const [openModal, setOpenModal] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
   const navigate = useNavigate();

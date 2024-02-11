@@ -1,6 +1,7 @@
 import { Modal, Button, Field, AmountRadio } from "@components/index";
 import { useFormik } from "formik";
 import { ChangeEvent, FC, useEffect } from "react";
+import toast from "react-hot-toast";
 
 import { radioAmount, initialValues } from "./index.constants";
 import { ModalBalanceProps, ModalBalanceValues } from "./index.types";
@@ -12,6 +13,8 @@ const ModalBalance: FC<ModalBalanceProps> = ({
 }) => {
   const handleSubmit = (values: ModalBalanceValues) => {
     replenishBalance(values.balance);
+    toast.success("Баланс успішно поповнений");
+    onClose();
   };
   const formik = useFormik<ModalBalanceValues>({
     initialValues,

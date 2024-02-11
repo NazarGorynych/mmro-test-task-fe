@@ -5,7 +5,7 @@ import { Navigate, useLocation } from "react-router-dom";
 
 const LayoutProtectedRoute = observer(({ children }: any) => {
   const {
-    auth: { user, isLoading }
+    resource: { user, isLoading }
   } = useStores();
   const location = useLocation();
   if (!user && !isLoading) {
