@@ -25,4 +25,5 @@ export { InitialRate } from "./InitialRate";
 export { AuctionCard } from "./AuctionCard";
 export { Confirm } from "./Confirm";
 export { Auction } from "./Auction";
+export { Spinner } from "./Spinner";
 export * from "./Form";

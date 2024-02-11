@@ -33,6 +33,7 @@ export class Resource {
       init: action,
       createUserAuctions: action,
       updateUserAuctions: action,
+      setBin: action,
       deleteAuction: action,
       replenishBalance: action,
       getUserAuctions: action,
@@ -132,6 +133,7 @@ export class Resource {
   signIn = async ({ email, password }: { email: string; password: string }) => {
     try {
       this.isLoading = true;
+      this.error = "";
       return await this.fetch.post("/login", {
         user: {
           email,
@@ -139,7 +141,7 @@ export class Resource {
         }
       });
     } catch (error) {
-      console.log(error, "error");
+      this.error = "Такий email не зареєстрований";
     } finally {
       this.isLoading = false;
     }
@@ -200,6 +202,18 @@ export class Resource {
         this.balance = data.amount;
         this.reservedBalance = data.reserved_amount;
       });
+      return data;
+    } catch (error) {
+      console.log(error, "error");
+    }
+  };
+
+  setBin = async (id: number, amount: string) => {
+    try {
+      const { data } = await this.fetch.post(`auctions/${id}/bids`, {
+        amount
+      });
+      console.log(data, "data");
       return data;
     } catch (error) {
       console.log(error, "error");

@@ -51,7 +51,7 @@ const HomePage = observer(() => {
     getAuctions();
   }, []);
   return (
-    <section className="w-full">
+    <section className="w-full mb-10">
       {auctions?.length && <Filter list={list} />}
       {auctions?.length ? (
         <div className="grid grid-cols-2 gap-5 w-full">

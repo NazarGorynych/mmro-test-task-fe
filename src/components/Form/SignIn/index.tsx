@@ -22,7 +22,7 @@ const validationSchema = Yup.object({
 
 const SignIn = observer(() => {
   const {
-    resource: { user, signIn }
+    resource: { user, signIn, error }
   } = useStores();
   const navigation = useNavigate();
   const [redirectTo, setRedirectTo] = useState<string | null>(null);
@@ -95,6 +95,11 @@ const SignIn = observer(() => {
           Увійти
         </Button>
       </div>
+      {error && (
+        <span className="text-error text-xs font-light w-full text-center">
+          {error}
+        </span>
+      )}
     </ComponentForm>
   );
 });

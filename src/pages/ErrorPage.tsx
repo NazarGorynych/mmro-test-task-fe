@@ -13,10 +13,10 @@ const ErrorPage = () => {
 
   return (
     <div id="error-page">
-      <h1>Oops!</h1>
-      <p>Sorry, an unexpected error has occurred.</p>
+      <h1 className="text-black">Oops!</h1>
+      <p className="text-block">Sorry, an unexpected error has occurred.</p>
       <p>
-        <i>{error.statusText || error.message}</i>
+        <i className="text-black">{error.statusText || error.message}</i>
       </p>
     </div>
   );

@@ -1,4 +1,4 @@
-import { Field, CheckboxButton } from "@components/index";
+import { CheckboxButton } from "@components/index";
 import cx from "clsx";
 import { useFormik } from "formik";
 import { FC } from "react";
@@ -25,7 +25,7 @@ const Filter: FC<FilterProps> = ({ list, className }) => {
           className
         )}
       >
-        {list.map((item) => {
+        {/* {list.map((item) => {
           return (
             <Field
               type="radio"
@@ -48,7 +48,7 @@ const Filter: FC<FilterProps> = ({ list, className }) => {
               value={item.value}
             />
           );
-        })}
+        })} */}
       </div>
       <CheckboxButton<FilterFormValues> formik={formik} checkboxs={checkboxs} />
     </ComponentForm>

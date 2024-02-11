@@ -11,7 +11,7 @@ const CalendarField: FC<CalendarFieldProps> = (props) => {
   const [value, setValue] = useState<Date | null>(props.value || new Date());
   const handleChange = (value: Date | null) => {
     setValue(value);
-    const date = moment(value).format("MM.DD.YYYY");
+    const date = moment(value).format();
     setFieldValue(name, date);
   };
   return (
