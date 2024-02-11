@@ -65,7 +65,7 @@ const CreateAction = observer(() => {
 
   const { values, errors, setFieldValue, touched } = formik;
   const { title, description, min_bid, main_image } = values;
-
+  console.log(values, "values");
   return (
     <ComponentForm
       onSubmit={formik.handleSubmit}
