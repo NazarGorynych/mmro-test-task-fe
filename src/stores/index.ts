@@ -1,13 +1,17 @@
 import { createContext } from "react";
 
 import { Auction } from "./auction";
-
-// import { user } from "./user";
+import { Authorization } from "./auth";
+import { User } from "./user";
 
 export class RootStore {
   auction: Auction;
+  user: User;
+  auth: Authorization;
   constructor() {
     this.auction = new Auction();
+    this.user = new User();
+    this.auth = new Authorization();
   }
 }
 

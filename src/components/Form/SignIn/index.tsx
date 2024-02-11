@@ -1,11 +1,44 @@
 import { Typography, Button, Icon, Field } from "@components/index";
+import { useStores } from "@hooks/index";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
+import { useFormik } from "formik";
+import { observer } from "mobx-react-lite";
 import { Link } from "react-router-dom";
+import * as Yup from "yup";
 
 import { ComponentForm } from "../ComponentForm";
+import { SignInValues } from "./index.types";
 
-const SignIn = () => {
+const validationSchema = Yup.object({
+  email: Yup.string()
+    .email("Неправильна адреса електронної пошти")
+    .required("Поле пароль є обов'язковим"),
+  password: Yup.string()
+    .min(8, "Пароль повинен містити понад 8 символів")
+    .matches(/[a-z]/, "Пароль повинен містити хоча б одну маленьку літеру")
+    .matches(/[A-Z]/, "Пароль повинен містити хоча б одну велику літеру")
+    .required("Поле пароль є обов'язковим")
+});
+
+const SignIn = observer(() => {
+  const {
+    auth: { signIn, isLoading }
+  } = useStores();
+
+  const handleSubmit = (values: SignInValues) => {
+    const { email, password } = values;
+    signIn({ email, password });
+  };
+  console.log(isLoading, "isLoading");
+  const formik = useFormik<SignInValues>({
+    initialValues: {
+      email: "",
+      password: ""
+    },
+    validationSchema,
+    onSubmit: handleSubmit
+  });
   const login = useGoogleLogin({
     onSuccess: async (credentialResponse) => {
       console.log(credentialResponse, "credentialResponse");
@@ -27,7 +60,7 @@ const SignIn = () => {
     }
   });
   return (
-    <ComponentForm type="white">
+    <ComponentForm onSubmit={formik.handleSubmit} type="white">
       <Typography text="Створити аккаунт" tag="h2" />
       <Button
         onClick={() => login()}
@@ -49,16 +82,32 @@ const SignIn = () => {
           Зареєструватись
         </Link>
       </span>
-      <Field label={"Email"} full />
-      <Field label={"Пароль"} full />
+      <Field
+        name="email"
+        onChange={formik.handleChange}
+        onBlur={formik.handleChange}
+        helperText={formik.errors?.email}
+        label={"Email"}
+        full
+      />
+      <Field
+        name="password"
+        onChange={formik.handleChange}
+        onBlur={formik.handleChange}
+        helperText={formik.errors?.password}
+        label={"Пароль"}
+        full
+      />
       <div className="flex gap-4">
-        <Button color="secondary" full>
+        <Button type="button" color="secondary" full>
           Назад
         </Button>
-        <Button full>Увійти</Button>
+        <Button type="submit" full>
+          Увійти
+        </Button>
       </div>
     </ComponentForm>
   );
-};
+});
 
 export { SignIn };

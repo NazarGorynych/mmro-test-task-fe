@@ -1,15 +1,34 @@
-import { makeAutoObservable } from "mobx";
+import { makeObservable, action, observable } from "mobx";
 
-export class Auction {
-  conter = 0;
+import { Resource } from "./resource";
+
+export class Auction extends Resource {
+  auctions = null;
+  auction = null;
   constructor() {
-    makeAutoObservable(this);
+    super();
+    makeObservable(this, {
+      auctions: observable,
+      auction: observable,
+      getAuctions: action,
+      getAuction: action
+    });
   }
-  increment = (value: number) => {
-    console.log(this.conter);
-    this.conter += value;
-  };
-  decrement = (value: number) => {
-    this.conter -= value;
-  };
+
+  async getAuctions() {
+    try {
+      const data = await this.fetch?.get("/auctions");
+      this.auctions = data?.data;
+    } catch (error) {
+      console.log(error, "error");
+    }
+  }
+  async getAuction(id: number) {
+    try {
+      const data = await this.fetch?.get(`/auctions/${id}`);
+      this.auction = data?.data;
+    } catch (error) {
+      console.log(error, "error");
+    }
+  }
 }
