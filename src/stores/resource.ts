@@ -19,7 +19,6 @@ export class Resource {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        // "X-Requested-With": "XmlHttpRequest",
         Authorization: `Bearer ${this.token}`
       }
     });

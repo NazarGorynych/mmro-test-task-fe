@@ -22,18 +22,20 @@ const validationSchema = Yup.object({
 
 const SignIn = observer(() => {
   const {
-    auth: { signIn }
+    auth: { signIn, user }
   } = useStores();
   const navigation = useNavigate();
   const [redirectTo, setRedirectTo] = useState<string | null>(null);
 
   const handleSubmit = (values: SignInValues) => {
     const { email, password } = values;
-    signIn({ email, password }).then(() => {
-      if (redirectTo) {
-        navigation(redirectTo);
-      } else {
-        navigation("/");
+    signIn({ email, password }).then((res) => {
+      if (res) {
+        if (redirectTo) {
+          navigation(redirectTo);
+        } else {
+          navigation("/");
+        }
       }
     });
   };
@@ -51,20 +53,16 @@ const SignIn = observer(() => {
     const referrer = document.referrer;
     const url = referrer ? new URL(referrer).pathname : `/`;
 
-    if (url) {
+    if (url && !user) {
       setRedirectTo(url);
+    } else if (user) {
+      navigation(url);
     }
   }, []);
 
   return (
     <ComponentForm onSubmit={formik.handleSubmit} type="white">
       <Typography text="Вхід" tag="h2" />
-      <span className="text-base bg-white flex justify-center items-center  text-black font-bold relative before:absolute before:w-full before:h-px before:bg-seconderyGray">
-        <span className="p-3 inline-block bg-white z-10">Чи</span>
-      </span>
-      <span className="text-base font-bold text-black">
-        Вхід за електроною почтою
-      </span>
       <span className="text-sm flex gap-1 text-black font-light">
         У вас ще не має акаунта?
         <Link className="text-sm text-primeryBlue font-bold" to={"/sign-up"}>

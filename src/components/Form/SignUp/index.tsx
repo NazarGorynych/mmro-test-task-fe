@@ -24,18 +24,20 @@ const validationSchema = Yup.object({
 
 const SignUp = observer(() => {
   const {
-    auth: { signUp }
+    auth: { signUp, error, user }
   } = useStores();
   const navigation = useNavigate();
   const [redirectTo, setRedirectTo] = useState<string | null>(null);
 
   const handleSubmit = async (values: SignUpValues) => {
     const { email, password, name, lastname } = values;
-    signUp({ email, password, name, lastname }).then(() => {
-      if (redirectTo) {
-        navigation(redirectTo);
-      } else {
-        navigation("/");
+    signUp({ email, password, name, lastname }).then((res) => {
+      if (res) {
+        if (redirectTo) {
+          navigation(redirectTo);
+        } else {
+          navigation("/");
+        }
       }
     });
   };
@@ -50,13 +52,14 @@ const SignUp = observer(() => {
     validationSchema,
     onSubmit: handleSubmit
   });
-
   useEffect(() => {
     const referrer = document.referrer;
     const url = referrer ? new URL(referrer).pathname : `/`;
 
-    if (url) {
+    if (url && !user) {
       setRedirectTo(url);
+    } else if (user) {
+      navigation(url, { replace: true });
     }
   }, []);
 
@@ -113,6 +116,11 @@ const SignUp = observer(() => {
           Зареєструватись
         </Button>
       </div>
+      {error && (
+        <span className="text-error text-xs font-light w-full text-center">
+          {error}
+        </span>
+      )}
     </ComponentForm>
   );
 });

@@ -6,11 +6,13 @@ import { Resource } from "./resource";
 export class Authorization extends Resource {
   isLoading: boolean = false;
   user: InfoUser | null = null;
+  error: string | null = null;
   constructor() {
     super();
     makeObservable(this, {
       isLoading: observable,
       user: observable,
+      error: observable,
       signIn: action,
       signUp: action,
       logout: action,
@@ -21,18 +23,18 @@ export class Authorization extends Resource {
   }
 
   async init() {
+    this.isLoading = true;
     await this.getUserInfo();
+    this.isLoading = false;
   }
 
   signIn = async ({ email, password }: { email: string; password: string }) => {
     try {
       this.isLoading = true;
-      await this.fetch?.post("/login", {
-        data: {
-          user: {
-            email,
-            password
-          }
+      return await this.fetch?.post("/login", {
+        user: {
+          email,
+          password
         }
       });
     } catch (error) {
@@ -54,6 +56,7 @@ export class Authorization extends Resource {
     lastname: string;
   }) => {
     try {
+      this.error = null;
       this.isLoading = true;
       const response = await this.fetch.post("/signup", {
         user: {
@@ -68,19 +71,28 @@ export class Authorization extends Resource {
         localStorage.setItem("token", token);
         runInAction(() => {
           this.token = token;
-          this.getUserInfo();
+          this.getUserInfo(token);
         });
       }
+      return response;
     } catch (error) {
+      this.error = "Користувач з таким email вже зареєстрований";
       console.log(error, "error");
     } finally {
       this.isLoading = false;
     }
   };
 
-  getUserInfo = async () => {
+  getUserInfo = async (token?: string) => {
     try {
-      const { data } = await this.fetch.get("/users/info");
+      const confim = token
+        ? {
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          }
+        : {};
+      const { data } = await this.fetch.get("/users/info", confim);
       this.user = data;
     } catch (error) {
       console.log(error);
