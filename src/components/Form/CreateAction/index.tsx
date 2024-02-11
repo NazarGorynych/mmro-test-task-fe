@@ -6,10 +6,10 @@ import {
   File
 } from "@components/index";
 import { useStores } from "@hooks/index";
-// import { convertToBase64 } from "@utils/helpers";
 import { useFormik } from "formik";
 import { observer } from "mobx-react-lite";
 import { ChangeEvent } from "react";
+import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
@@ -25,7 +25,6 @@ const validationSchema = Yup.object({
     .required("Поле є обов'язковим")
     .positive("Значення має бути більше 0")
     .integer("Значення має бути цілим числом"),
-  // categors: Yup.string().required("Поле є обов'язковим"),
   start_date: Yup.string().required("Поле є обов'язковим"),
   end_date: Yup.string().required("Поле є обов'язковим")
 });
@@ -34,23 +33,29 @@ const CreateAction = observer(() => {
   const {
     resource: { createUserAuctions }
   } = useStores();
-  const handleSubmit = (values: CreateActionValues) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (values: CreateActionValues) => {
     const formData = new FormData();
     formData.append("file", values.main_image);
     Object.entries(values).forEach(([name, value]) =>
       formData.append(name, value)
     );
-    createUserAuctions(formData);
+    await createUserAuctions(formData);
+    toast.success("Аукціон був створений");
+    navigate("/");
   };
+
   const formik = useFormik<CreateActionValues>({
     initialValues,
     onSubmit: handleSubmit,
     validationSchema
   });
-  const navigate = useNavigate();
+
   const goBack = () => {
     navigate(-1);
   };
+
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     if (event.currentTarget.files) {
       setFieldValue("main_image", event.currentTarget.files[0]);

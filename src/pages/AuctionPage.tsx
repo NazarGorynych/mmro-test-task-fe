@@ -20,7 +20,7 @@ const AuctionPage = observer(() => {
     return null;
   }
   return (
-    <section>
+    <section className="mb-10">
       <Auction key={auction.id} {...auction} />
     </section>
   );

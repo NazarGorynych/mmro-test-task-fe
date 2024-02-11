@@ -52,7 +52,7 @@ const MyAuctionPage = observer(() => {
     getUserAuctions();
   }, []);
   return (
-    <section className="w-full flex flex-col gap-9">
+    <section className="w-full flex flex-col gap-9 mb-10">
       <Typography tag="h2" text="Мої Аукціони та Ставки" />
       {userAuctions?.length ? (
         <>
