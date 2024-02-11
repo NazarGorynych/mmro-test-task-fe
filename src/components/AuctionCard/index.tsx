@@ -74,13 +74,13 @@ const AuctionCard: FC<AuctionCardProps> = ({
             >
               <Icon type={"DeleteIcon"} className="hover:fill-[#FF3333]" />
             </Button>
-            <Button
+            {/* <Button
               onClick={handleEditClick}
               className="!p-0"
               color="transparent"
             >
               <Icon type={"EditIcon"} className="hover:fill-primeryBlue" />
-            </Button>
+            </Button> */}
           </div>
         ) : (
           <div>

@@ -7,6 +7,7 @@ import {
   Button,
   Field
 } from "@components/index";
+import { useStores } from "@hooks/useStores";
 import { ColorsTag } from "@utils/types";
 import { useFormik } from "formik";
 import { FC, useEffect, ChangeEvent } from "react";
@@ -31,10 +32,15 @@ const Auction: FC<AuctionProps> = ({
   created_at,
   updated_at
 }) => {
-  const handleSubmit = (values: AuctionValues) => {
-    console.log(values, "values");
-    // replenishBalance(values.balance);
-    toast.success("Баланс успішно поповнений");
+  const {
+    resource: { setBin }
+  } = useStores();
+  const handleSubmit = async (values: AuctionValues, actions: any) => {
+    if (id) {
+      await setBin(id, values.balance);
+    }
+    toast.success("Ставко успішно зроблена");
+    actions.resetForm();
   };
   const formik = useFormik<AuctionValues>({
     initialValues,
@@ -114,7 +120,9 @@ const Auction: FC<AuctionProps> = ({
             className="!rounded-2xl !py-6 h-20 text-center text-xl font-bold"
             onChange={handleChange}
           />
-          <Button full={true}>Зробити ставку</Button>
+          <Button disabled={+values.balance <= 0} full={true}>
+            Зробити ставку
+          </Button>
         </form>
       </div>
     </article>
