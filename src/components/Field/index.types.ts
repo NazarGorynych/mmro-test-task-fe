@@ -7,7 +7,7 @@ export type FieldProps = ComponentProps<"input"> & {
     helperText?: string;
   };
   label?: string | ReactNode;
-  helperText?: string;
+  helperText?: string | boolean;
   isRequred?: boolean;
   full?: boolean;
 };

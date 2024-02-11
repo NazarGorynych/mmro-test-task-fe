@@ -31,4 +31,12 @@ export class Auction extends Resource {
       console.log(error, "error");
     }
   }
+  async createBid(id: number) {
+    try {
+      const data = await this.fetch?.get(`/auctions/${id}/bids`);
+      this.auction = data?.data;
+    } catch (error) {
+      console.log(error, "error");
+    }
+  }
 }

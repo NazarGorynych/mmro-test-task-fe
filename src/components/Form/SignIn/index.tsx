@@ -1,10 +1,9 @@
-import { Typography, Button, Icon, Field } from "@components/index";
+import { Typography, Button, Field } from "@components/index";
 import { useStores } from "@hooks/index";
-import { useGoogleLogin } from "@react-oauth/google";
-import axios from "axios";
 import { useFormik } from "formik";
 import { observer } from "mobx-react-lite";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 import { ComponentForm } from "../ComponentForm";
@@ -23,14 +22,22 @@ const validationSchema = Yup.object({
 
 const SignIn = observer(() => {
   const {
-    auth: { signIn, isLoading }
+    auth: { signIn }
   } = useStores();
+  const navigation = useNavigate();
+  const [redirectTo, setRedirectTo] = useState<string | null>(null);
 
   const handleSubmit = (values: SignInValues) => {
     const { email, password } = values;
-    signIn({ email, password });
+    signIn({ email, password }).then(() => {
+      if (redirectTo) {
+        navigation(redirectTo);
+      } else {
+        navigation("/");
+      }
+    });
   };
-  console.log(isLoading, "isLoading");
+
   const formik = useFormik<SignInValues>({
     initialValues: {
       email: "",
@@ -39,37 +46,19 @@ const SignIn = observer(() => {
     validationSchema,
     onSubmit: handleSubmit
   });
-  const login = useGoogleLogin({
-    onSuccess: async (credentialResponse) => {
-      console.log(credentialResponse, "credentialResponse");
 
-      try {
-        const res = await axios.get(
-          "https://www.googleapis.com/oauth2/v3/userinfo",
-          {
-            headers: {
-              Authorization: `Bearer ${credentialResponse.access_token}`
-            }
-          }
-        );
-        console.log(res, "res");
-      } catch (error) {
-        console.log(error, "error");
-      }
-      console.log(credentialResponse);
+  useEffect(() => {
+    const referrer = document.referrer;
+    const url = referrer ? new URL(referrer).pathname : `/`;
+
+    if (url) {
+      setRedirectTo(url);
     }
-  });
+  }, []);
+
   return (
     <ComponentForm onSubmit={formik.handleSubmit} type="white">
-      <Typography text="Створити аккаунт" tag="h2" />
-      <Button
-        onClick={() => login()}
-        full={true}
-        color="secondary"
-        className="flex gap-4"
-      >
-        <Icon type="GoogleIcon" /> Продовжити з Google
-      </Button>
+      <Typography text="Вхід" tag="h2" />
       <span className="text-base bg-white flex justify-center items-center  text-black font-bold relative before:absolute before:w-full before:h-px before:bg-seconderyGray">
         <span className="p-3 inline-block bg-white z-10">Чи</span>
       </span>
@@ -83,18 +72,20 @@ const SignIn = observer(() => {
         </Link>
       </span>
       <Field
+        isRequred
         name="email"
         onChange={formik.handleChange}
         onBlur={formik.handleChange}
-        helperText={formik.errors?.email}
+        helperText={formik.touched?.email && formik.errors?.email}
         label={"Email"}
         full
       />
       <Field
+        isRequred
         name="password"
         onChange={formik.handleChange}
         onBlur={formik.handleChange}
-        helperText={formik.errors?.password}
+        helperText={formik.touched?.password && formik.errors?.password}
         label={"Пароль"}
         full
       />

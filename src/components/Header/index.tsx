@@ -5,16 +5,19 @@ import {
   DropdownAccount,
   ModalBalance
 } from "@components/index";
+import { useStores } from "@hooks/index";
 import cx from "clsx";
+import { observer } from "mobx-react-lite";
 import { useState } from "react";
 import { useNavigate, NavLink } from "react-router-dom";
 
-const Header = () => {
+const Header = observer(() => {
+  const {
+    auth: { user, logout }
+  } = useStores();
   const [openModal, setOpenModal] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
   const navigate = useNavigate();
-  const isLogin = true;
-
   const handleToggleDropdown = () => {
     setOpenDropdown((currentValue) => !currentValue);
   };
@@ -33,13 +36,14 @@ const Header = () => {
   };
 
   const handleClick = () => {
-    navigate("/login");
+    navigate("/sign-up");
   };
+
   return (
     <header className="bg-white px-24 flex z-[1000] items-center py-10 justify-between sticky top-0 h-32 shadow-xl">
       <MainLogo className="fill-black" />
       <div className="flex gap-6">
-        {isLogin ? (
+        {user ? (
           <nav className="flex gap-9 items-center">
             <NavLink
               className={({ isActive }) =>
@@ -79,16 +83,19 @@ const Header = () => {
           isOpen={openDropdown}
           onClose={handleCloseDropdown}
           handleOpenModal={handleOpenModal}
-          balance={0}
+          user={user}
+          logout={logout}
         >
-          <Button onClick={handleToggleDropdown} color="transparent">
-            <Icon type="AccountIcon" className=" hover:fill-primeryBlue" />
-          </Button>
+          {user && (
+            <Button onClick={handleToggleDropdown} color="transparent">
+              <Icon type="AccountIcon" className="hover:fill-primeryBlue" />
+            </Button>
+          )}
         </DropdownAccount>
       </div>
       <ModalBalance open={openModal} onClose={handleCloseModal} />
     </header>
   );
-};
+});
 
 export { Header };
