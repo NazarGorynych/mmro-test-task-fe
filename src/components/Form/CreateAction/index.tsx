@@ -1,9 +1,10 @@
 import {
-  Typography, // CheckboxButton,
+  Typography,
   Field,
   CalendarField,
   Button,
-  File
+  File,
+  Spinner
 } from "@components/index";
 import { useStores } from "@hooks/index";
 import { useFormik } from "formik";
@@ -68,9 +69,10 @@ const CreateAction = observer(() => {
   return (
     <ComponentForm
       onSubmit={formik.handleSubmit}
-      className="max-w-4xl "
+      className="max-w-4xl relative"
       type="white"
     >
+      {formik.isSubmitting && <Spinner />}
       <Typography text="Створення нового аукціону" tag="h2" />
       <File
         value={main_image}
