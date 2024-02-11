@@ -3,7 +3,7 @@ import { FC } from "react";
 
 import { ConfirmProps } from "./index.types";
 
-const Confirm: FC<ConfirmProps> = ({ open, onClose, isButton }) => {
+const Confirm: FC<ConfirmProps> = ({ open, onClose, isButton, handleYes }) => {
   return (
     <Modal onClose={onClose} open={open}>
       <Modal.Header
@@ -19,7 +19,7 @@ const Confirm: FC<ConfirmProps> = ({ open, onClose, isButton }) => {
           <Button full onClick={onClose}>
             Ні
           </Button>
-          <Button full color="secondary">
+          <Button onClick={handleYes} full color="secondary">
             Так
           </Button>
         </Modal.Footer>

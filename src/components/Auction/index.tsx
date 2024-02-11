@@ -11,7 +11,6 @@ import { ColorsTag } from "@utils/types";
 import { useFormik } from "formik";
 import { FC, useEffect, ChangeEvent } from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
 
 import { radioAmount, initialValues } from "./index.constants";
 import { AuctionProps, AuctionValues } from "./index.types";
@@ -32,7 +31,6 @@ const Auction: FC<AuctionProps> = ({
   created_at,
   updated_at
 }) => {
-  const navigate = useNavigate();
   const handleSubmit = (values: AuctionValues) => {
     console.log(values, "values");
     // replenishBalance(values.balance);
@@ -58,13 +56,38 @@ const Auction: FC<AuctionProps> = ({
   }, [amount]);
   return (
     <article className="flex gap-[20px] p-4 bg-none relative w-full max-h-[682px]">
-      {main_image && (
+      <div className="grid grid-cols-3 grid-rows-3 gap-4">
         <img
-          className="w-96 h-96 rounded-2xl"
-          src={process.env.REACT_APP_API + main_image}
-          alt="main-image"
+          className="h-auto max-w-full rounded-lg"
+          src={process.env.PUBLIC_URL + "/images/auction-image.png"}
+          alt=""
         />
-      )}
+        <img
+          className="h-auto max-w-full rounded-lg col-span-2 row-span-2"
+          src={process.env.PUBLIC_URL + "/images/auction-image-xl.png"}
+          alt=""
+        />
+        <img
+          className="h-auto max-w-full rounded-lg"
+          src={process.env.PUBLIC_URL + "/images/auction-image.png"}
+          alt=""
+        />
+        <img
+          className="h-auto max-w-full rounded-lg"
+          src={process.env.PUBLIC_URL + "/images/auction-image.png"}
+          alt=""
+        />
+        <img
+          className="h-auto max-w-full rounded-lg"
+          src={process.env.PUBLIC_URL + "/images/auction-image.png"}
+          alt=""
+        />
+        <img
+          className="h-auto max-w-full rounded-lg"
+          src={process.env.PUBLIC_URL + "/images/auction-image.png"}
+          alt=""
+        />
+      </div>
       <div className="flex flex-col h-full overflow-auto gap-[24px] w-full grid-cols-2">
         <div className="flex flex-wrap gap-2 max-w-40">
           <Tag color={status.toLocaleLowerCase() as ColorsTag} text={status} />

@@ -17,7 +17,7 @@ export const list = [
     value: "all"
   },
   {
-    id: 0,
+    id: 1,
     title: "Ставки",
     value: "rate"
   }
@@ -27,7 +27,7 @@ const MyAuctionPage = observer(() => {
   useDocumentTitle("My Auction");
   const navigate = useNavigate();
   const {
-    resource: { getUserAuctions, userAuctions }
+    resource: { getUserAuctions, userAuctions, deleteAuction }
   } = useStores();
   const [openConfirm, setOpenConfirm] = useState(false);
   const [idAuction, setIdAuction] = useState<number | null>(null);
@@ -35,8 +35,15 @@ const MyAuctionPage = observer(() => {
     setOpenConfirm(true);
     setIdAuction(id);
   };
+
   const handleCloseConfirm = () => {
     setOpenConfirm(false);
+  };
+  const handleYes = () => {
+    if (idAuction) {
+      deleteAuction(idAuction);
+    }
+    handleCloseConfirm();
   };
   const handleReditectToCreateAuction = () => {
     navigate("/create-auction");
@@ -72,6 +79,7 @@ const MyAuctionPage = observer(() => {
         open={openConfirm}
         onClose={handleCloseConfirm}
         isButton={true}
+        handleYes={handleYes}
       />
     </section>
   );

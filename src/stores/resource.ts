@@ -33,6 +33,7 @@ export class Resource {
       init: action,
       createUserAuctions: action,
       updateUserAuctions: action,
+      deleteAuction: action,
       replenishBalance: action,
       getUserAuctions: action,
       getUserAuction: action,
@@ -210,8 +211,21 @@ export class Resource {
   getUserAuctions = async () => {
     try {
       const { data } = await this.fetch.get("users/auctions");
-      this.userAuctions = data;
+      this.userAuctions = data.auctions;
       return data;
+    } catch (error) {
+      console.log(error, "error");
+    }
+  };
+
+  deleteAuction = async (id: number) => {
+    try {
+      await this.fetch.delete(`users/auctions/${id}`);
+      if (this.userAuctions) {
+        this.userAuctions = this.userAuctions?.filter(
+          (autcio) => autcio.id !== id
+        );
+      }
     } catch (error) {
       console.log(error, "error");
     }
