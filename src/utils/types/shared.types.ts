@@ -44,3 +44,10 @@ export type FilterListType = {
   title: string;
   value: string;
 };
+
+export type ColorsTag =
+  | "draft"
+  | "active"
+  | "completed"
+  | "upcoming"
+  | "canceled";

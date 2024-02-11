@@ -1,21 +1,16 @@
 import { Auction } from "@components/index";
 import { useDocumentTitle, useStores } from "@hooks/index";
+import { observer } from "mobx-react-lite";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-const auctioneer = {
-  id: 1,
-  firstname: "Микола",
-  lastname: "Парасюк"
-};
-
-const AuctionPage = () => {
+const AuctionPage = observer(() => {
   const {
     resource: { getAuction, auction }
   } = useStores();
   const { auctionId } = useParams();
   useDocumentTitle("Card | Auction");
-
+  console.log(Object.assign({}, auction), "auctionId");
   useEffect(() => {
     if (auctionId) {
       getAuction(+auctionId);
@@ -29,6 +24,6 @@ const AuctionPage = () => {
       <Auction key={auction.id} {...auction} />
     </section>
   );
-};
+});
 
 export { AuctionPage };

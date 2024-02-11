@@ -54,11 +54,11 @@ const HomePage = observer(() => {
     <section className="w-full">
       {auctions?.length && <Filter list={list} />}
       {auctions?.length ? (
-        <>
+        <div className="grid grid-cols-2 gap-5 w-full">
           {auctions?.map((auction) => (
             <AuctionCard key={auction.id} {...auction} />
           ))}
-        </>
+        </div>
       ) : (
         <span className="text-black mt-20 text-xl font-bold block text-center">
           Немає аукціонів

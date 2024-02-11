@@ -1,7 +1,9 @@
-import { Colors } from "./index.types";
+import { ColorsTag } from "@utils/types";
 
-export const colors: Record<Colors, string> = {
-  blue: "bg-[#EFEFFD] text-[#615EF0]",
-  green: "bg-[#2DAC00] text-[#2DAC00] bg-opacity-10",
-  yellow: "bg-[#F1A004] text-[#F1A004] bg-opacity-10"
+export const colors: Record<ColorsTag, string> = {
+  canceled: "bg-[##F60808] text-[#F60808] bg-opacity-10",
+  active: "bg-[#2DAC00] text-[#2DAC00] bg-opacity-10",
+  upcoming: "bg-[#F1A004] text-[#F1A004] bg-opacity-10",
+  draft: "",
+  completed: ""
 };

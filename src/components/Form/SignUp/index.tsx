@@ -12,14 +12,14 @@ import { SignUpValues } from "./index.types";
 const validationSchema = Yup.object({
   email: Yup.string()
     .email("Неправильна адреса електронної пошти")
-    .required("Поле пароль є обов'язковим"),
+    .required("Поле є обов'язковим"),
   password: Yup.string()
     .min(8, "Пароль повинен містити понад 8 символів")
     .matches(/[a-z]/, "Пароль повинен містити хоча б одну маленьку літеру")
     .matches(/[A-Z]/, "Пароль повинен містити хоча б одну велику літеру")
-    .required("Поле пароль є обов'язковим"),
-  name: Yup.string().required("Поле пароль є обов'язковим"),
-  lastname: Yup.string().required("Поле пароль є обов'язковим")
+    .required("Поле є обов'язковим"),
+  name: Yup.string().required("Поле є обов'язковим"),
+  lastname: Yup.string().required("Поле є обов'язковим")
 });
 
 const SignUp = observer(() => {

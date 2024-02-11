@@ -11,7 +11,7 @@ export type Profile = {
 };
 
 export type AuctionType = {
-  id: number;
+  id?: number;
   title: string;
   description: string;
   min_bid: string;
@@ -19,9 +19,10 @@ export type AuctionType = {
   bid_type: string;
   status: "draft" | "active" | "completed" | "upcoming" | "canceled";
   start_date: string;
+  main_image: any;
   end_date: string;
-  winner_id: string;
-  user_id: string;
-  created_at: string;
-  updated_at: string;
+  winner_id?: string;
+  user_id?: string;
+  created_at?: string;
+  updated_at?: string;
 };

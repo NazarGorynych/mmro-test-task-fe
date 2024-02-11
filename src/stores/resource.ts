@@ -90,9 +90,13 @@ export class Resource {
     }
   };
 
-  createUserAuctions = async () => {
+  createUserAuctions = async (body: any) => {
     try {
-      const data = await this.fetch.get("/users/auctions");
+      const data = await this.fetch.post("/users/auctions", body, {
+        headers: {
+          "Content-Type": "multipart/form-data"
+        }
+      });
       this.userAuctions = data?.data;
     } catch (error) {
       console.log(error, "error");
@@ -188,7 +192,6 @@ export class Resource {
 
   replenishBalance = async (amount: string) => {
     try {
-      console.log(this.fetch, " this.fetch");
       const { data } = await this.fetch.put("users/replenish", {
         amount
       });
@@ -204,7 +207,15 @@ export class Resource {
 
   updateUserAuctions = async () => {};
 
-  getUserAuctions = async () => {};
+  getUserAuctions = async () => {
+    try {
+      const { data } = await this.fetch.get("users/auctions");
+      this.userAuctions = data;
+      return data;
+    } catch (error) {
+      console.log(error, "error");
+    }
+  };
 
   getUserAuction = async () => {};
 

@@ -1,10 +1,12 @@
 import {
   Icon,
-  Typography, // Tag,
+  Typography,
+  Tag,
   DateComponent,
   InitialRate,
   Button
 } from "@components/index";
+import { ColorsTag } from "@utils/types";
 import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -30,11 +32,11 @@ const AuctionCard: FC<AuctionCardProps> = ({
   const navigate = useNavigate();
 
   const handleCardClick = () => {
-    navigate(`${id}`);
+    navigate(`/auction/${id}`);
   };
 
   const handleDeleteClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    if (handleOpenConfirm) {
+    if (handleOpenConfirm && id) {
       event.stopPropagation(); // Prevents the click event from reaching the card
       handleOpenConfirm(id);
     }
@@ -52,19 +54,17 @@ const AuctionCard: FC<AuctionCardProps> = ({
     >
       <img src={process.env.PUBLIC_URL + "/images/auction-image.png"} />
       <div className="flex flex-col max-h-80 overflow-auto gap-2 w-full">
-        <div className="flex flex-wrap gap-2 max-w-40"></div>
+        <div className="flex flex-wrap gap-2 max-w-40">
+          <Tag color={status.toLocaleLowerCase() as ColorsTag} text={status} />
+        </div>
         <Typography tag="h4" text={title} />
         <InitialRate label="Початкова ставка:" rate={min_bid} />
-        {isUserCard && (
-          <DateComponent
-            label={"Дата початку аукціону"}
-            date={"2023-01-28T15:35:01.123Z"}
-          />
+        {isUserCard && startDate && (
+          <DateComponent label={"Дата початку аукціону"} date={startDate} />
         )}
-        <DateComponent
-          label={"Дата закінчення аукціону"}
-          date={"2023-01-28T15:35:01.123Z"}
-        />
+        {endDate && (
+          <DateComponent label={"Дата закінчення аукціону"} date={endDate} />
+        )}
         {isUserCard ? (
           <div className="flex absolute top-4 right-4 gap-2">
             <Button

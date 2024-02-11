@@ -1,6 +1,7 @@
 import { Datepicker } from "@aliakbarazizi/headless-datepicker";
 import { Icon, Label } from "@components/index";
 import cx from "clsx";
+import moment from "moment";
 import { FC, useState } from "react";
 
 import { CalendarFieldProps } from "./index.types";
@@ -10,7 +11,8 @@ const CalendarField: FC<CalendarFieldProps> = (props) => {
   const [value, setValue] = useState<Date | null>(props.value || new Date());
   const handleChange = (value: Date | null) => {
     setValue(value);
-    setFieldValue(name, value);
+    const date = moment(value).format("MM.DD.YYYY");
+    setFieldValue(name, date);
   };
   return (
     <div

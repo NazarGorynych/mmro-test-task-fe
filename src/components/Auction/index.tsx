@@ -1,4 +1,5 @@
-import { Typography, DateComponent, InitialRate } from "@components/index";
+import { Typography, DateComponent, InitialRate, Tag } from "@components/index";
+import { ColorsTag } from "@utils/types";
 import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -14,6 +15,7 @@ const Auction: FC<AuctionProps> = ({
   status,
   start_date,
   end_date,
+  main_image,
   winner_id,
   user_id,
   created_at,
@@ -23,43 +25,16 @@ const Auction: FC<AuctionProps> = ({
 
   return (
     <article className="flex gap-[20px] p-4 bg-none relative w-full max-h-[682px]">
-      <div className="grid grid-cols-3 grid-rows-3 gap-4">
+      {main_image && (
         <img
-          className="h-auto max-w-full rounded-lg"
-          src={process.env.PUBLIC_URL + "/images/auction-image.png"}
-          alt=""
+          className="w-96 h-96 rounded-2xl"
+          src={main_image}
+          alt="main-image"
         />
-        <img
-          className="h-auto max-w-full rounded-lg col-span-2 row-span-2"
-          src={process.env.PUBLIC_URL + "/images/auction-image-xl.png"}
-          alt=""
-        />
-        <img
-          className="h-auto max-w-full rounded-lg"
-          src={process.env.PUBLIC_URL + "/images/auction-image.png"}
-          alt=""
-        />
-        <img
-          className="h-auto max-w-full rounded-lg"
-          src={process.env.PUBLIC_URL + "/images/auction-image.png"}
-          alt=""
-        />
-        <img
-          className="h-auto max-w-full rounded-lg"
-          src={process.env.PUBLIC_URL + "/images/auction-image.png"}
-          alt=""
-        />
-        <img
-          className="h-auto max-w-full rounded-lg"
-          src={process.env.PUBLIC_URL + "/images/auction-image.png"}
-          alt=""
-        />
-      </div>
-      <div className="flex flex-col h-full overflow-auto gap-[24px] w-full">
-        <div className="flex flex-wrap w-full h-[40px]">
-          {/* {tags.map((tag) => {
-            return <Tag key={tag.id} text={tag.text} />;
-          })} */}
+      )}
+      <div className="flex flex-col h-full overflow-auto gap-[24px] w-full grid-cols-2">
+        <div className="flex flex-wrap gap-2 max-w-40">
+          <Tag color={status.toLocaleLowerCase() as ColorsTag} text={status} />
         </div>
         <Typography tag="h2" text={title} />
         <Typography
@@ -68,7 +43,9 @@ const Auction: FC<AuctionProps> = ({
           text={description}
         />
         <InitialRate label="Початкова ставка:" rate={min_bid} />
-        <DateComponent label={"Дата закінчення аукціону"} date={end_date} />
+        {end_date && (
+          <DateComponent label={"Дата закінчення аукціону"} date={end_date} />
+        )}
         <div className="flex absolute right-4 gap-2">
           <img
             className="max-w-[40px] max-h-[40px] rounded-lg"

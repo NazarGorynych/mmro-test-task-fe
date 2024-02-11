@@ -16,7 +16,7 @@ const Filter: FC<FilterProps> = ({ list, className }) => {
 
   return (
     <ComponentForm
-      className="w-full flex flex-col gap-10"
+      className="w-full flex flex-col gap-10 mb-20"
       onSubmit={formik.handleSubmit}
     >
       <div

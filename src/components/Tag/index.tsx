@@ -4,7 +4,7 @@ import { FC } from "react";
 import { colors } from "./index.constants";
 import { TagProps } from "./index.types";
 
-const Tag: FC<TagProps> = ({ color = "blue", text }) => {
+const Tag: FC<TagProps> = ({ color = "active", text }) => {
   return (
     <span
       className={cx(colors[color], "text-xs font-bold px-3 py-2 rounded-2xl")}

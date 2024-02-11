@@ -5,6 +5,7 @@ export type {
   DropdownOption,
   AmmoutRadioType,
   TagsType,
-  FilterListType
+  FilterListType,
+  ColorsTag
 } from "./shared.types";
 export type { InfoUser, AuctionType } from "./api.types";

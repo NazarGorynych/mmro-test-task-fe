@@ -1,13 +1,3 @@
-export type CreateActionValues = {
-  cover: string;
-  name: string;
-  description: string;
-  initialRate: number;
-  category: {
-    technique: boolean;
-    sport: boolean;
-    book: boolean;
-  };
-  startDate: Date;
-  endDate: Date;
-};
+import { AuctionType } from "@utils/types";
+
+export type CreateActionValues = AuctionType;
