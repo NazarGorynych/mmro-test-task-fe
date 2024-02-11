@@ -7,3 +7,8 @@ export type Auctioneer = {
   firstname: string;
   lastname: string;
 };
+
+export type AuctionValues = {
+  amount: string | null;
+  balance: string;
+};
