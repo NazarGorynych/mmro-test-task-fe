@@ -22,6 +22,38 @@ export const checkboxs: CheckboxButtonType[] = [
     name: "category.book"
   }
 ];
+export const incereaseBidCheckboxs: CheckboxButtonType[] = [
+  {
+    id: 0,
+    title: "+50",
+    value: "+50",
+    name: "category.50"
+  },
+  {
+    id: 1,
+    title: "+100",
+    value: "+100",
+    name: "category.100"
+  },
+  {
+    id: 2,
+    title: "+200",
+    value: "+200",
+    name: "category.200"
+  },
+  {
+    id: 3,
+    title: "+500",
+    value: "+500",
+    name: "category.500"
+  },
+  {
+    id: 4,
+    title: "+1000",
+    value: "+1000",
+    name: "category.1000"
+  }
+];
 
 export const initialValues: CreateActionValues = {
   main_image: "",
