@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         element: <HomePage />
       },
       {
-        path: "my-auction/:auctionId",
+        path: "auction/:auctionId",
         element: (
           <LayoutProtectedRoute>
             <AuctionPage />

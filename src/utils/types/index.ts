@@ -7,4 +7,4 @@ export type {
   TagsType,
   FilterListType
 } from "./shared.types";
-export type { InfoUser } from "./api.types";
+export type { InfoUser, AuctionType } from "./api.types";

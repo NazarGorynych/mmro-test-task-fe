@@ -1,37 +1,26 @@
-import { InfoUser } from "@utils/types";
 import { makeObservable, action, observable, runInAction } from "mobx";
 
 import { Resource } from "./resource";
 
 export class Authorization extends Resource {
   isLoading: boolean = false;
-  user: InfoUser | null = null;
   error: string | null = null;
   constructor() {
     super();
     makeObservable(this, {
       isLoading: observable,
-      user: observable,
       error: observable,
       signIn: action,
       signUp: action,
       logout: action,
-      getUserInfo: action,
       init: action
     });
-    this.init();
-  }
-
-  async init() {
-    this.isLoading = true;
-    await this.getUserInfo();
-    this.isLoading = false;
   }
 
   signIn = async ({ email, password }: { email: string; password: string }) => {
     try {
       this.isLoading = true;
-      return await this.fetch?.post("/login", {
+      return await this.fetch.post("/login", {
         user: {
           email,
           password
@@ -80,22 +69,6 @@ export class Authorization extends Resource {
       console.log(error, "error");
     } finally {
       this.isLoading = false;
-    }
-  };
-
-  getUserInfo = async (token?: string) => {
-    try {
-      const confim = token
-        ? {
-            headers: {
-              Authorization: `Bearer ${token}`
-            }
-          }
-        : {};
-      const { data } = await this.fetch.get("/users/info", confim);
-      this.user = data;
-    } catch (error) {
-      console.log(error);
     }
   };
 

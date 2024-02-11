@@ -13,7 +13,10 @@ import { useNavigate, NavLink } from "react-router-dom";
 
 const Header = observer(() => {
   const {
-    auth: { user, logout }
+    resource: { user },
+    auth: { logout },
+    user: { replenishBalance },
+    resource: { balance, reservedBalance }
   } = useStores();
   const [openModal, setOpenModal] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
@@ -38,7 +41,6 @@ const Header = observer(() => {
   const handleClick = () => {
     navigate("/sign-up");
   };
-
   return (
     <header className="bg-white px-24 flex z-[1000] items-center py-10 justify-between sticky top-0 h-32 shadow-xl">
       <MainLogo className="fill-black" />
@@ -83,8 +85,9 @@ const Header = observer(() => {
           isOpen={openDropdown}
           onClose={handleCloseDropdown}
           handleOpenModal={handleOpenModal}
-          user={user}
           logout={logout}
+          balance={balance}
+          reservedBalance={reservedBalance}
         >
           {user && (
             <Button onClick={handleToggleDropdown} color="transparent">
@@ -93,7 +96,11 @@ const Header = observer(() => {
           )}
         </DropdownAccount>
       </div>
-      <ModalBalance open={openModal} onClose={handleCloseModal} />
+      <ModalBalance
+        replenishBalance={replenishBalance}
+        open={openModal}
+        onClose={handleCloseModal}
+      />
     </header>
   );
 });

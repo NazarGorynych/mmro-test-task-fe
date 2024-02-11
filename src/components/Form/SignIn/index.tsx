@@ -22,7 +22,8 @@ const validationSchema = Yup.object({
 
 const SignIn = observer(() => {
   const {
-    auth: { signIn, user }
+    resource: { user },
+    auth: { signIn }
   } = useStores();
   const navigation = useNavigate();
   const [redirectTo, setRedirectTo] = useState<string | null>(null);
@@ -58,7 +59,7 @@ const SignIn = observer(() => {
     } else if (user) {
       navigation(url);
     }
-  }, []);
+  }, [user]);
 
   return (
     <ComponentForm onSubmit={formik.handleSubmit} type="white">

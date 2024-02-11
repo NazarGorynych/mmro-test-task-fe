@@ -1,5 +1,7 @@
-import { Filter } from "@components/index";
-import { useDocumentTitle } from "@hooks/index";
+import { Filter, AuctionCard } from "@components/index";
+import { useDocumentTitle, useStores } from "@hooks/index";
+import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
 
 export const list = [
   {
@@ -39,13 +41,31 @@ export const list = [
   }
 ];
 
-const HomePage = () => {
+const HomePage = observer(() => {
   useDocumentTitle("Home | Auction");
+  const {
+    auction: { getAuctions, auctions }
+  } = useStores();
+
+  useEffect(() => {
+    getAuctions();
+  }, []);
   return (
     <section className="w-full">
-      <Filter list={list} />
+      {auctions?.length && <Filter list={list} />}
+      {auctions?.length ? (
+        <>
+          {auctions?.map((auction) => (
+            <AuctionCard key={auction.id} {...auction} />
+          ))}
+        </>
+      ) : (
+        <span className="text-black mt-20 text-xl font-bold block text-center">
+          Немає аукціонів
+        </span>
+      )}
     </section>
   );
-};
+});
 
 export { HomePage };

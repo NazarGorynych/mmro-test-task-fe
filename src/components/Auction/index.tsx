@@ -1,17 +1,23 @@
-import { Typography, Tag, DateComponent, InitialRate } from "@components/index";
+import { Typography, DateComponent, InitialRate } from "@components/index";
 import React, { FC } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AuctionProps } from "./index.types";
 
 const Auction: FC<AuctionProps> = ({
-  tags,
-  title,
-  initialRate,
   id,
-  startDate,
-  endDate,
-  auctioneer
+  title,
+  description,
+  min_bid,
+  min_bid_diff,
+  bid_type,
+  status,
+  start_date,
+  end_date,
+  winner_id,
+  user_id,
+  created_at,
+  updated_at
 }) => {
   const navigate = useNavigate();
 
@@ -51,18 +57,18 @@ const Auction: FC<AuctionProps> = ({
       </div>
       <div className="flex flex-col h-full overflow-auto gap-[24px] w-full">
         <div className="flex flex-wrap w-full h-[40px]">
-          {tags.map((tag) => {
+          {/* {tags.map((tag) => {
             return <Tag key={tag.id} text={tag.text} />;
-          })}
+          })} */}
         </div>
         <Typography tag="h2" text={title} />
         <Typography
           className="w-full max-h-[120px]"
           tag="p"
-          text="Sed  tuibusdam et aut officiis debitis aut rerum necessitatibum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."
+          text={description}
         />
-        <InitialRate label="Початкова ставка:" rate={initialRate} />
-        <DateComponent label={"Дата закінчення аукціону"} date={endDate} />
+        <InitialRate label="Початкова ставка:" rate={min_bid} />
+        <DateComponent label={"Дата закінчення аукціону"} date={end_date} />
         <div className="flex absolute right-4 gap-2">
           <img
             className="max-w-[40px] max-h-[40px] rounded-lg"
@@ -70,7 +76,7 @@ const Auction: FC<AuctionProps> = ({
             alt=""
           />
           <ul className="max-h-[40px]">
-            <Typography
+            {/* <Typography
               className="font-bold"
               tag="p"
               text={`${auctioneer.firstname}`}
@@ -79,7 +85,7 @@ const Auction: FC<AuctionProps> = ({
               className="font-bold"
               tag="p"
               text={`${auctioneer.lastname}`}
-            />
+            /> */}
           </ul>
         </div>
       </div>

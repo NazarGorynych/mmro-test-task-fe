@@ -5,12 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { DropdownAccountProps } from "./index.typs";
 
 const DropdownAccount: FC<DropdownAccountProps> = ({
-  user,
   isOpen,
   children,
   handleOpenModal,
   onClose,
-  logout
+  logout,
+  balance,
+  reservedBalance
 }) => {
   const navigate = useNavigate();
   const handleClickWrapper = (event: MouseEvent<HTMLDivElement>) => {
@@ -45,7 +46,7 @@ const DropdownAccount: FC<DropdownAccountProps> = ({
                 <span className="flex flex-col items-start">
                   <span className="text-sm font-light text-black">Баланс</span>
                   <span className="text-primeryBlue text-lg font-bold">
-                    {user?.wallet_amount} UAH
+                    {balance} UAH
                   </span>
                 </span>
               </button>

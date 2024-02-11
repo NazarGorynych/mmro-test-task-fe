@@ -5,8 +5,14 @@ import { ChangeEvent, FC, useEffect } from "react";
 import { radioAmount, initialValues } from "./index.constants";
 import { ModalBalanceProps, ModalBalanceValues } from "./index.types";
 
-const ModalBalance: FC<ModalBalanceProps> = ({ open, onClose }) => {
-  const handleSubmit = () => {};
+const ModalBalance: FC<ModalBalanceProps> = ({
+  open,
+  onClose,
+  replenishBalance
+}) => {
+  const handleSubmit = (values: ModalBalanceValues) => {
+    replenishBalance(values.balance);
+  };
   const formik = useFormik<ModalBalanceValues>({
     initialValues,
     onSubmit: handleSubmit

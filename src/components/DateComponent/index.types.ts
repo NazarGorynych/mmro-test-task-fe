@@ -1,4 +1,4 @@
 export type DateComponentProps = {
-  date: Date;
+  date: string;
   label: string;
 };

@@ -1,35 +1,53 @@
-import { action, makeObservable, observable } from "mobx";
+import { AuctionType } from "@utils/types";
+import { action, makeObservable, observable, runInAction } from "mobx";
 
 import { Resource } from "./resource";
 
 export class User extends Resource {
-  userAuctions = null;
+  userAuctions: AuctionType[] | null = null;
   constructor() {
     super();
     makeObservable(this, {
       userAuctions: observable,
       createUserAuctions: action,
       updateUserAuctions: action,
+      replenishBalance: action,
       getUserAuctions: action,
       getUserAuction: action,
       deleteUserAuction: action
     });
   }
 
-  async createUserAuctions() {
+  createUserAuctions = async () => {
     try {
-      const data = await this.fetch?.get("/users/auctions");
+      const data = await this.fetch.get("/users/auctions");
       this.userAuctions = data?.data;
     } catch (error) {
       console.log(error, "error");
     }
-  }
+  };
 
-  async updateUserAuctions() {}
+  replenishBalance = async (amount: string) => {
+    try {
+      console.log(this.fetch, " this.fetch");
+      const { data } = await this.fetch.put("users/replenish", {
+        amount
+      });
+      runInAction(() => {
+        this.balance = data.amount;
+        this.reservedBalance = data.reserved_amount;
+      });
+      return data;
+    } catch (error) {
+      console.log(error, "error");
+    }
+  };
 
-  async getUserAuctions() {}
+  updateUserAuctions = async () => {};
 
-  async getUserAuction() {}
+  getUserAuctions = async () => {};
 
-  async deleteUserAuction() {}
+  getUserAuction = async () => {};
+
+  deleteUserAuction = async () => {};
 }
