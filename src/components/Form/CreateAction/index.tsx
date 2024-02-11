@@ -1,33 +1,65 @@
 import {
-  Typography,
-  CheckboxButton,
+  Typography, // CheckboxButton,
   Field,
   CalendarField,
   Button,
   File
 } from "@components/index";
+import { useStores } from "@hooks/index";
+// import { convertToBase64 } from "@utils/helpers";
 import { useFormik } from "formik";
+import { observer } from "mobx-react-lite";
+import { ChangeEvent } from "react";
 import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 
 import { ComponentForm } from "../ComponentForm";
-import { initialValues, checkboxs } from "./index.constants";
+import { initialValues } from "./index.constants";
 import { CreateActionValues } from "./index.types";
 
-const CreateAction = () => {
+const validationSchema = Yup.object({
+  main_image: Yup.string().required("Аватарка є обов'язковой"),
+  title: Yup.string().required("Поле є обов'язковим"),
+  description: Yup.string().required("Поле є обов'язковим"),
+  min_bid: Yup.number()
+    .required("Поле є обов'язковим")
+    .positive("Значення має бути більше 0")
+    .integer("Значення має бути цілим числом"),
+  // categors: Yup.string().required("Поле є обов'язковим"),
+  start_date: Yup.string().required("Поле є обов'язковим"),
+  end_date: Yup.string().required("Поле є обов'язковим")
+});
+
+const CreateAction = observer(() => {
+  const {
+    resource: { createUserAuctions }
+  } = useStores();
   const handleSubmit = (values: CreateActionValues) => {
-    console.log(values, "values");
+    const formData = new FormData();
+    formData.append("file", values.main_image);
+    Object.entries(values).forEach(([name, value]) =>
+      formData.append(name, value)
+    );
+    createUserAuctions(formData);
   };
   const formik = useFormik<CreateActionValues>({
     initialValues,
-    onSubmit: handleSubmit
+    onSubmit: handleSubmit,
+    validationSchema
   });
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);
   };
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.currentTarget.files) {
+      setFieldValue("main_image", event.currentTarget.files[0]);
+    }
+  };
 
-  const { values, errors, setFieldValue } = formik;
-  const { name, description, initialRate } = values;
+  const { values, errors, setFieldValue, touched } = formik;
+  const { title, description, min_bid, main_image } = values;
+
   return (
     <ComponentForm
       onSubmit={formik.handleSubmit}
@@ -36,21 +68,22 @@ const CreateAction = () => {
     >
       <Typography text="Створення нового аукціону" tag="h2" />
       <File
-        name={"cover"}
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        id={"name"}
+        value={main_image}
+        name={"main_image"}
+        onChange={handleChange}
+        id={"cover"}
+        helperText={touched.main_image && errors?.main_image}
       />
       <Field
-        value={name}
+        value={title}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         label={"Назва"}
         full
         isRequred
         placeholder="Назва"
-        name="name"
-        helperText={errors && errors?.name}
+        name="title"
+        helperText={touched.title && errors?.title}
       />
       <Field
         value={description}
@@ -61,35 +94,39 @@ const CreateAction = () => {
         label={"Опис"}
         placeholder="Опис"
         name="description"
-        helperText={errors && errors?.description}
+        helperText={touched.description && errors?.description}
       />
       <Field
-        value={initialRate}
+        isRequred
+        value={min_bid}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
         label={"Початкова ставка"}
         type="number"
         placeholder="12 000"
-        name={"initialRate"}
-        helperText={errors && errors?.initialRate}
+        name={"min_bid"}
+        helperText={touched.min_bid && errors?.min_bid}
       />
-      <CheckboxButton<CreateActionValues>
+      {/* <CheckboxButton<CreateActionValues>
         formik={formik}
         checkboxs={checkboxs}
         classes={{
           container: "!justify-start"
         }}
         label={"Категорія"}
-      />
+        name={"categors"}
+      /> */}
       <CalendarField
         label="Дата старту аукціону"
-        name="startDate"
+        name="start_date"
         setFieldValue={setFieldValue}
+        helperText={touched?.start_date && errors?.start_date}
       />
       <CalendarField
         label="Дата закінчення аукціону"
-        name="endDate"
+        name="end_date"
         setFieldValue={setFieldValue}
+        helperText={touched?.end_date && errors?.end_date}
       />
       <div className="flex gap-8">
         <Button
@@ -107,6 +144,6 @@ const CreateAction = () => {
       </div>
     </ComponentForm>
   );
-};
+});
 
 export { CreateAction };

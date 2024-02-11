@@ -1,8 +1,10 @@
 import { PropsWithChildren } from "react";
 
 export type DropdownAccountProps = {
-  balance?: number;
   isOpen: boolean;
   onClose: () => void;
   handleOpenModal: () => void;
+  logout: () => void;
+  balance: string;
+  reservedBalance: string;
 } & PropsWithChildren;

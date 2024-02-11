@@ -1,20 +1,29 @@
 import { Icon } from "@components/index";
 import { FC, MouseEvent } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { DropdownAccountProps } from "./index.typs";
 
 const DropdownAccount: FC<DropdownAccountProps> = ({
-  balance,
   isOpen,
   children,
   handleOpenModal,
-  onClose
+  onClose,
+  logout,
+  balance,
+  reservedBalance
 }) => {
+  const navigate = useNavigate();
   const handleClickWrapper = (event: MouseEvent<HTMLDivElement>) => {
     const element = (event.target as HTMLElement).closest("#dropdown");
     if (!element) {
       onClose();
     }
+  };
+  const handleLogout = () => {
+    logout();
+    onClose();
+    navigate("/");
   };
   return (
     <>
@@ -43,7 +52,10 @@ const DropdownAccount: FC<DropdownAccountProps> = ({
               </button>
             </li>
             <li className="px-7 py-1.5 rounded-lg hover:bg-black hover:bg-opacity-5 h-14 flex justify-center items-center">
-              <button className="w-full text-base font-bold text-black">
+              <button
+                onClick={handleLogout}
+                className="w-full text-base font-bold text-black"
+              >
                 Вихід
               </button>
             </li>

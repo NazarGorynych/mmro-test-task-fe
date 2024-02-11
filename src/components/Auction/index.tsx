@@ -1,32 +1,59 @@
-import { Typography, Tag, DateComponent, InitialRate, CheckboxButton, Button } from "@components/index";
-import React, { FC } from "react";
-import { useNavigate } from "react-router-dom";
-
-import { AuctionProps } from "./index.types";
-import { ComponentForm } from "@components/Form/ComponentForm";
-import { CreateActionValues } from "@components/Form/CreateAction/index.types";
-import { incereaseBidCheckboxs, initialValues } from "@components/Form/CreateAction/index.constants";
+import {
+  Typography,
+  DateComponent,
+  InitialRate,
+  Tag,
+  AmountRadio,
+  Button,
+  Field
+} from "@components/index";
+import { ColorsTag } from "@utils/types";
 import { useFormik } from "formik";
+import { FC, useEffect, ChangeEvent } from "react";
+import toast from "react-hot-toast";
+
+import { radioAmount, initialValues } from "./index.constants";
+import { AuctionProps, AuctionValues } from "./index.types";
 
 const Auction: FC<AuctionProps> = ({
-  tags,
-  title,
-  initialRate,
   id,
-  startDate,
-  endDate,
-  auctioneer
+  title,
+  description,
+  min_bid,
+  min_bid_diff,
+  bid_type,
+  status,
+  start_date,
+  end_date,
+  main_image,
+  winner_id,
+  user_id,
+  created_at,
+  updated_at
 }) => {
-  const navigate = useNavigate();
-  const handleSubmit = (values: CreateActionValues) => {
+  const handleSubmit = (values: AuctionValues) => {
     console.log(values, "values");
+    // replenishBalance(values.balance);
+    toast.success("Баланс успішно поповнений");
   };
-  const formik = useFormik<CreateActionValues>({
+  const formik = useFormik<AuctionValues>({
     initialValues,
     onSubmit: handleSubmit
   });
-  const nextMinBid = 100;
+  const { values } = formik;
+  const { amount, balance } = values;
 
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    formik.setFieldValue("balance", value);
+    formik.setFieldValue("amount", value);
+  };
+
+  useEffect(() => {
+    if (amount) {
+      formik.setFieldValue("balance", amount);
+    }
+  }, [amount]);
   return (
     <article className="flex gap-[20px] p-4 bg-none relative w-full max-h-[682px]">
       <div className="grid grid-cols-3 grid-rows-3 gap-4">
@@ -61,75 +88,34 @@ const Auction: FC<AuctionProps> = ({
           alt=""
         />
       </div>
-      <div className="flex flex-col h-full overflow-auto w-full">
-        <div className="flex flex-col h-full overflow-auto w-full gap-[24px]">
-          <div className="flex flex-wrap w-full h-[40px]">
-            {tags.map((tag) => {
-              return <Tag key={tag.id} text={tag.text} />;
-            })}
-          </div>
-          <Typography tag="h2" text={title} />
-          <Typography
-            className="w-full max-h-[120px]"
-            tag="p"
-            text="Sed  tuibusdam et aut officiis debitis aut rerum necessitatibum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat."
-          />
-          <InitialRate label="Початкова ставка:" rate={initialRate} />
-          <DateComponent label={"Дата закінчення аукціону"} date={endDate} />
-          <div className="flex absolute right-4 gap-2">
-            <img
-              className="max-w-[40px] max-h-[40px] rounded-lg"
-              src={process.env.PUBLIC_URL + "/images/sample-person.png"}
-              alt=""
-            />
-            <ul className="max-h-[40px]">
-              <Typography
-                className="font-bold"
-                tag="p"
-                text={`${auctioneer.firstname}`}
-              />
-              <Typography
-                className="font-bold"
-                tag="p"
-                text={`${auctioneer.lastname}`}
-              />
-            </ul>
-          </div>
+      <div className="flex flex-col h-full overflow-auto gap-[24px] w-full grid-cols-2">
+        <div className="flex flex-wrap gap-2 max-w-40">
+          <Tag color={status.toLocaleLowerCase() as ColorsTag} text={status} />
         </div>
-        <hr className="h-px my-4 bg-gray-200 dark:bg-gray-700"/>
+        <Typography tag="h2" text={title} />
+        <Typography
+          className="w-full max-h-[120px]"
+          tag="p"
+          text={description}
+        />
+        <InitialRate label="Початкова ставка:" rate={min_bid} />
+        {end_date && (
+          <DateComponent label={"Дата закінчення аукціону"} date={end_date} />
+        )}
+        <hr className="h-px my-4 bg-gray-200 dark:bg-gray-700" />
 
-        <ComponentForm
-          type="transparent"
-        >
-          <CheckboxButton<CreateActionValues>
-            formik={formik}
-            checkboxs={incereaseBidCheckboxs}
-            classes={{
-              container: "!justify-between !gap-4"
-            }}
-            label={"Введіть суму на яку хочете зробити ставку в гривнях"}
+        <form className="flex flex-col gap-6" onSubmit={formik.handleSubmit}>
+          <AmountRadio name={"amount"} amounts={radioAmount} formik={formik} />
+          <Field
+            full
+            value={balance}
+            type="number"
+            name="balance"
+            className="!rounded-2xl !py-6 h-20 text-center text-xl font-bold"
+            onChange={handleChange}
           />
-          <div className={"grid rows-2 gap-[24px] pt-[24px]"}>
-            <Button
-              color={"secondary"}
-              rounded={"normal"}
-              positionText={"center"}
-              sizeButton={"xl"}
-              full={true}
-              className={"!min-h-[72px]"}>
-              <Typography tag="h5" text={`${nextMinBid} грн`}/>
-            </Button>
-            <Button
-              color={"main"}
-              rounded={"normal"}
-              positionText={"center"}
-              sizeButton={"xl"}
-              full={true}
-              >
-              <Typography className={"text-white"} tag="h6" text={"Зробити ставку"}/>
-            </Button>
-          </div>
-        </ComponentForm>
+          <Button full={true}>Зробити ставку</Button>
+        </form>
       </div>
     </article>
   );

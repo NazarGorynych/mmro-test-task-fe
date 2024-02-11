@@ -1,3 +1,5 @@
+import { FilterListType } from "@utils/types";
+
 export type ActionTypes =
   | "all"
   | "technique"
@@ -12,4 +14,9 @@ export type FilterFormValues = {
   pastAction: boolean;
   activeAction: boolean;
   plansAction: boolean;
+};
+
+export type FilterProps = {
+  list: FilterListType[];
+  className?: string;
 };

@@ -22,7 +22,7 @@ export { AmountRadio } from "./AmountRadio";
 export { Tag } from "./Tag";
 export { DateComponent } from "./DateComponent";
 export { InitialRate } from "./InitialRate";
-export { MyAuctionCard } from "./MyAuctionCard";
+export { AuctionCard } from "./AuctionCard";
 export { Confirm } from "./Confirm";
 export { Auction } from "./Auction";
 export * from "./Form";

@@ -1,6 +1,6 @@
-export type Colors = "blue" | "yellow" | "green";
+import { ColorsTag } from "@utils/types";
 
 export type TagProps = {
   text: string;
-  color?: Colors;
+  color?: ColorsTag;
 };

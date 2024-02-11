@@ -1,4 +1,4 @@
-import { RootLayout } from "@layout/index";
+import { RootLayout, LayoutProtectedRoute } from "@layout/index";
 import {
   ErrorPage,
   HomePage,
@@ -26,16 +26,28 @@ const router = createBrowserRouter([
         element: <HomePage />
       },
       {
-        path: "my-auction/:auctionId",
-        element: <AuctionPage />
+        path: "auction/:auctionId",
+        element: (
+          <LayoutProtectedRoute>
+            <AuctionPage />
+          </LayoutProtectedRoute>
+        )
       },
       {
         path: "my-auction",
-        element: <MyAuctionPage />
+        element: (
+          <LayoutProtectedRoute>
+            <MyAuctionPage />
+          </LayoutProtectedRoute>
+        )
       },
       {
         path: "create-auction",
-        element: <CreateAuctionPage />
+        element: (
+          <LayoutProtectedRoute>
+            <CreateAuctionPage />
+          </LayoutProtectedRoute>
+        )
       },
       {
         path: "login",

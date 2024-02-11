@@ -1,12 +1,13 @@
 import { Field, CheckboxButton } from "@components/index";
 import cx from "clsx";
 import { useFormik } from "formik";
+import { FC } from "react";
 
 import { ComponentForm } from "../ComponentForm";
-import { listFilter, initialValues, checkboxs } from "./index.constants";
-import { FilterFormValues } from "./index.types";
+import { initialValues, checkboxs } from "./index.constants";
+import { FilterFormValues, FilterProps } from "./index.types";
 
-const Filter = () => {
+const Filter: FC<FilterProps> = ({ list, className }) => {
   const handleSubmit = () => {};
   const formik = useFormik<FilterFormValues>({
     initialValues,
@@ -15,11 +16,16 @@ const Filter = () => {
 
   return (
     <ComponentForm
-      className="w-full flex flex-col gap-10"
+      className="w-full flex flex-col gap-10 mb-20"
       onSubmit={formik.handleSubmit}
     >
-      <div className="flex flex-wrap gap-y-4 justify-between border-b-[#E6E1E1] border-b-2">
-        {listFilter.map((item) => {
+      <div
+        className={cx(
+          "flex flex-wrap gap-y-4 justify-between border-b-[#E6E1E1] border-b-2",
+          className
+        )}
+      >
+        {list.map((item) => {
           return (
             <Field
               type="radio"

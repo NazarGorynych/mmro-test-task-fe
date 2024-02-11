@@ -56,15 +56,13 @@ export const incereaseBidCheckboxs: CheckboxButtonType[] = [
 ];
 
 export const initialValues: CreateActionValues = {
-  cover: "",
-  name: "",
+  main_image: "",
+  title: "",
   description: "",
-  initialRate: 0,
-  category: {
-    technique: false,
-    sport: false,
-    book: false
-  },
-  startDate: new Date(),
-  endDate: new Date()
+  min_bid: "",
+  min_bid_diff: "20",
+  bid_type: "sum_win",
+  status: "active",
+  start_date: "",
+  end_date: ""
 };

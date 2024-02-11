@@ -2,10 +2,10 @@ import { Classes } from "@utils/types";
 
 export type CalendarFieldProps = {
   name: string;
-  setFieldValue: (name: string, value: Date | null) => void;
+  setFieldValue: (name: string, value: string | null) => void;
   value?: Date;
   isRequred?: boolean;
-  helperText?: string;
+  helperText?: string | boolean;
   label?: string;
   classes?: Classes & {
     label?: string;

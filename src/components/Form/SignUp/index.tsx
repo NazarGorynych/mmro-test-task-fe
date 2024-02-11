@@ -1,66 +1,128 @@
-import { Typography, Button, Icon, Field } from "@components/index";
-import { useGoogleLogin } from "@react-oauth/google";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { Typography, Button, Field } from "@components/index";
+import { useStores } from "@hooks/index";
+import { useFormik } from "formik";
+import { observer } from "mobx-react-lite";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 
 import { ComponentForm } from "../ComponentForm";
+import { SignUpValues } from "./index.types";
 
-const SignUp = () => {
-  const login = useGoogleLogin({
-    onSuccess: async (credentialResponse) => {
-      console.log(credentialResponse, "credentialResponse");
+const validationSchema = Yup.object({
+  email: Yup.string()
+    .email("Неправильна адреса електронної пошти")
+    .required("Поле є обов'язковим"),
+  password: Yup.string()
+    .min(8, "Пароль повинен містити понад 8 символів")
+    .matches(/[a-z]/, "Пароль повинен містити хоча б одну маленьку літеру")
+    .matches(/[A-Z]/, "Пароль повинен містити хоча б одну велику літеру")
+    .required("Поле є обов'язковим"),
+  name: Yup.string().required("Поле є обов'язковим"),
+  lastname: Yup.string().required("Поле є обов'язковим")
+});
 
-      try {
-        const res = await axios.get(
-          "https://www.googleapis.com/oauth2/v3/userinfo",
-          {
-            headers: {
-              Authorization: `Bearer ${credentialResponse.access_token}`
-            }
-          }
-        );
-        console.log(res, "res");
-      } catch (error) {
-        console.log(error, "error");
+const SignUp = observer(() => {
+  const {
+    resource: { user, signUp, error }
+  } = useStores();
+  const navigation = useNavigate();
+  const [redirectTo, setRedirectTo] = useState<string | null>(null);
+
+  const handleSubmit = async (values: SignUpValues) => {
+    const { email, password, name, lastname } = values;
+    signUp({ email, password, name, lastname }).then((res) => {
+      if (res) {
+        if (redirectTo) {
+          navigation(redirectTo);
+        } else {
+          navigation("/");
+        }
       }
-      console.log(credentialResponse);
-    }
+    });
+  };
+
+  const formik = useFormik<SignUpValues>({
+    initialValues: {
+      email: "",
+      password: "",
+      lastname: "",
+      name: ""
+    },
+    validationSchema,
+    onSubmit: handleSubmit
   });
+  useEffect(() => {
+    const referrer = document.referrer;
+    const url = referrer ? new URL(referrer).pathname : `/`;
+
+    if (url && !user) {
+      setRedirectTo(url);
+    } else if (user) {
+      navigation(url, { replace: true });
+    }
+  }, [user]);
+
   return (
-    <ComponentForm type="white">
+    <ComponentForm onSubmit={formik.handleSubmit} type="white">
       <Typography text="Створити аккаунт" tag="h2" />
-      <Button
-        onClick={() => login()}
-        full={true}
-        color="secondary"
-        className="flex gap-4"
-      >
-        <Icon type="GoogleIcon" /> Створити аккаунт з Google
-      </Button>
-      <span className="text-base bg-white flex justify-center items-center  text-black font-bold relative before:absolute before:w-full before:h-px before:bg-seconderyGray">
-        <span className="p-3 inline-block bg-white z-10">Чи</span>
-      </span>
-      <span className="text-base font-bold text-black">
-        Вхід за електроною почтою
-      </span>
       <span className="text-sm flex gap-1 text-black font-light">
         У вас вже є акаунт?
         <Link className="text-sm text-primeryBlue font-bold" to={"/login"}>
           Увійти
         </Link>
       </span>
-      <Field label={"Ім'я"} full />
-      <Field label={"Фамілія"} full />
-      <Field label={"Email"} full />
-      <Field label={"Пароль"} full />
+      <Field
+        isRequred
+        name={"name"}
+        onChange={formik.handleChange}
+        onBlur={formik.handleChange}
+        helperText={formik.touched?.name && formik.errors?.name}
+        label={"Ім'я"}
+        full
+      />
+      <Field
+        isRequred
+        name={"lastname"}
+        onChange={formik.handleChange}
+        onBlur={formik.handleChange}
+        helperText={formik.touched?.lastname && formik.errors?.lastname}
+        label={"Фамілія"}
+        full
+      />
+      <Field
+        isRequred
+        name={"email"}
+        onChange={formik.handleChange}
+        onBlur={formik.handleChange}
+        helperText={formik.touched?.email && formik.errors?.email}
+        label={"Email"}
+        full
+      />
+      <Field
+        isRequred
+        name={"password"}
+        onChange={formik.handleChange}
+        onBlur={formik.handleChange}
+        helperText={formik.touched?.password && formik.errors?.password}
+        label={"Пароль"}
+        full
+      />
       <div className="flex gap-4">
-        <Button color="secondary" full>
+        <Button type="button" color="secondary" full>
           Назад
         </Button>
-        <Button full>Зареєструватись</Button>
+        <Button type="submit" full>
+          Зареєструватись
+        </Button>
       </div>
+      {error && (
+        <span className="text-error text-xs font-light w-full text-center">
+          {error}
+        </span>
+      )}
     </ComponentForm>
   );
-};
+});
 
 export { SignUp };

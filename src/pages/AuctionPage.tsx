@@ -1,43 +1,29 @@
 import { Auction } from "@components/index";
-import { useDocumentTitle } from "@hooks/index";
+import { useDocumentTitle, useStores } from "@hooks/index";
+import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-const auction = {
-  id: 0,
-  tags: [
-    {
-      id: 0,
-      text: "Техніка"
-    }
-  ],
-  title: "Iphone XR, 256 гб",
-  initialRate: "15 000",
-  startDate: new Date(),
-  endDate: new Date()
-};
-const auctioneer = {
-  id: 1,
-  firstname: "Микола",
-  lastname: "Парасюк"
-};
-const AuctionPage = () => {
-  const params = useParams();
+const AuctionPage = observer(() => {
+  const {
+    resource: { getAuction, auction }
+  } = useStores();
+  const { auctionId } = useParams();
   useDocumentTitle("Card | Auction");
-
+  console.log(Object.assign({}, auction), "auctionId");
+  useEffect(() => {
+    if (auctionId) {
+      getAuction(+auctionId);
+    }
+  }, []);
+  if (!auction) {
+    return null;
+  }
   return (
     <section>
-      <Auction
-        key={auction.id}
-        id={auction.id}
-        tags={auction.tags}
-        startDate={auction.startDate}
-        endDate={auction.endDate}
-        title={auction.title}
-        initialRate={auction.initialRate}
-        auctioneer={auctioneer}
-      />
+      <Auction key={auction.id} {...auction} />
     </section>
   );
-};
+});
 
 export { AuctionPage };

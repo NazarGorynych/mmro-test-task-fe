@@ -4,5 +4,8 @@ export type {
   FormikActions,
   DropdownOption,
   AmmoutRadioType,
-  TagsType
+  TagsType,
+  FilterListType,
+  ColorsTag
 } from "./shared.types";
+export type { InfoUser, AuctionType } from "./api.types";

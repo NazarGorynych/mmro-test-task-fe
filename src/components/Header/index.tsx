@@ -5,15 +5,20 @@ import {
   DropdownAccount,
   ModalBalance
 } from "@components/index";
+import { useStores } from "@hooks/index";
+import cx from "clsx";
+import { observer } from "mobx-react-lite";
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
-const Header = () => {
+const Header = observer(() => {
+  const {
+    resource: { user, logout, replenishBalance, reservedBalance, balance }
+  } = useStores();
+
   const [openModal, setOpenModal] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(false);
   const navigate = useNavigate();
-  const isLogin = true;
-
   const handleToggleDropdown = () => {
     setOpenDropdown((currentValue) => !currentValue);
   };
@@ -32,24 +37,44 @@ const Header = () => {
   };
 
   const handleClick = () => {
-    navigate("/login");
+    navigate("/sign-up");
   };
   return (
     <header className="bg-white px-24 flex z-[1000] items-center py-10 justify-between sticky top-0 h-32 shadow-xl">
       <MainLogo className="fill-black" />
       <div className="flex gap-6">
-        {isLogin ? (
+        {user ? (
           <nav className="flex gap-9 items-center">
-            <Link
-              className="text-black text-lg font-bold flex gap-2 items-center"
+            <NavLink
+              className={({ isActive }) =>
+                cx("text-black text-lg font-bold flex gap-2 items-center", {
+                  "text-primeryBlue": isActive
+                })
+              }
               to={"/create-auction"}
             >
-              <Icon type={"PlusIcon"} className="stroke-black" />
-              Cтворити аукціон
-            </Link>
-            <Link className="text-black text-lg font-bold" to={"/my-auction"}>
+              {({ isActive }) => (
+                <>
+                  <Icon
+                    type={"PlusIcon"}
+                    className={cx("stroke-black", {
+                      "stroke-primeryBlue": isActive
+                    })}
+                  />
+                  Cтворити аукціон
+                </>
+              )}
+            </NavLink>
+            <NavLink
+              className={({ isActive }) =>
+                cx("text-black text-lg font-bold", {
+                  "text-primeryBlue": isActive
+                })
+              }
+              to={"/my-auction"}
+            >
               Мої аукціони
-            </Link>
+            </NavLink>
           </nav>
         ) : (
           <Button onClick={handleClick}>Зареєструватись</Button>
@@ -58,16 +83,24 @@ const Header = () => {
           isOpen={openDropdown}
           onClose={handleCloseDropdown}
           handleOpenModal={handleOpenModal}
-          balance={0}
+          logout={logout}
+          balance={balance}
+          reservedBalance={reservedBalance}
         >
-          <Button onClick={handleToggleDropdown} color="transparent">
-            <Icon type="AccountIcon" className=" hover:fill-primeryBlue" />
-          </Button>
+          {user && (
+            <Button onClick={handleToggleDropdown} color="transparent">
+              <Icon type="AccountIcon" className="hover:fill-primeryBlue" />
+            </Button>
+          )}
         </DropdownAccount>
       </div>
-      <ModalBalance open={openModal} onClose={handleCloseModal} />
+      <ModalBalance
+        replenishBalance={replenishBalance}
+        open={openModal}
+        onClose={handleCloseModal}
+      />
     </header>
   );
-};
+});
 
 export { Header };
